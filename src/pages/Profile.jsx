@@ -4,7 +4,7 @@ import UserTransaction from '../components/UserTransaction.jsx'
 import Footer from '../components/Footer.jsx'
 // import LogoArgentBank from '../img/argentBankLogo.png'
 
-export default function User() {
+export default function Profile() {
   const datasAccount = [
     {
       title: 'Argent Bank Checking (x8349)',

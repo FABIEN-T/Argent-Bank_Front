@@ -4,6 +4,10 @@ import './styles/index.scss'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 
+import { Provider } from 'react-redux'
+
+import store from './storeRedux/store'
+
 /**
  * @file index.js –
  * @author Fabien_Varlet
@@ -13,9 +17,11 @@ import reportWebVitals from './reportWebVitals'
 const root = createRoot(document.getElementById('root'))
 
 root.render(
-  <StrictMode>
-    <App />
-  </StrictMode>
+  <Provider store={store}>
+    <StrictMode>
+      <App />
+    </StrictMode>
+  </Provider>
 )
 
 // If you want to start measuring performance in your app, pass a function

@@ -4,7 +4,8 @@ import './main.css'
 // import Header from './components/Header'
 import Home from './pages/Home.jsx'
 import Login from './pages/Login.jsx'
-import User from './pages/User.jsx'
+import PrivateRoute from './components/PrivateRoute'
+import Profile from './pages/Profile.jsx'
 import Error from './pages/Error.jsx'
 // import Footer from './components/Footer'
 // import Profil from './pages/Profil'
@@ -17,10 +18,15 @@ export default function App() {
         {/* <Header /> */}
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* renommer en profile */}
           <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<User />} />
-          {/* <Route path="/erreurAPI" element={<Error errorNumber={503} />} /> */}
+          {/* <Route
+            path="/profile"
+            element={
+              // <PrivateRoute>
+              <Profile />
+              // </PrivateRoute>
+            }
+          /> */}
           <Route path="*" element={<Error errorNumber={404} />} />
         </Routes>
         {/* <Footer /> */}

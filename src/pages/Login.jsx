@@ -1,85 +1,138 @@
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { Formik, Field, Form, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
+
+import { login } from '../storeRedux/auth'
+import { clearMessage } from '../storeRedux/message'
+
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 
-import React from 'react'
-// import { useState } from 'react'
-// import { useForm } from 'react-hook-form'
+const Login = () => {
+  let navigate = useNavigate()
 
-import '../main.css'
+  const [loading, setLoading] = useState(false)
 
-export default function Login() {
-  //   const {
-  //     register,
-  //     handleSubmit,
-  //     formState: { errors },
-  //   } = useForm()
-  //   const onSubmit = (data) => console.log(data)
-  //   console.log(errors)
+  const { isLoggedIn } = useSelector((state) => state.auth)
+  const { message } = useSelector((state) => state.message)
+
+  console.log('isLoggedIn', isLoggedIn)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(clearMessage())
+  }, [dispatch])
+
+  const initialValues = {
+    username: '',
+    password: '',
+  }
+
+  const validationSchema = Yup.object().shape({
+    username: Yup.string().required('This field is required!'),
+    password: Yup.string().required('This field is required!'),
+  })
+
+  const handleLogin = (formValue) => {
+    const { username, password } = formValue
+    setLoading(true)
+
+    dispatch(login({ username, password }))
+      .unwrap()
+      .then(() => {
+        navigate('/profile')
+        window.location.reload()
+      })
+      .catch(() => {
+        setLoading(false)
+      })
+  }
+
+  if (isLoggedIn) {
+    return <Navigate to="/profile" />
+  }
 
   return (
     <div className="container">
       <Header />
-      {/* <main classNameName="main bg-dark">
-        <section classNameName="sign-in-content">
-          <i classNameName="fa fa-user-circle sign-in-icon"></i>
-          <h1>Sign In</h1>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div classNameName="input-wrapper">
-              <label htmlFor="username">Username</label>
-              <input
-                type="text"
-                //   placeholder="Username"
-                {...register('Username', {})}
-                id="username"
-              />
-            </div>
-            <div classNameName="input-wrapper">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                // placeholder="Password"
-                {...register('Password', {})}
-                id="password"
-              />
-            </div>
-            <div classNameName="input-remember">
-              <input type="checkbox" id="remember-me" />
-              <label htmlFor="remember-me">Remember me</label>
-            </div>
-            <input type="submit" classNameName="sign-in-button" />
-          </form>
-        </section>
-      </main> */}
-      {/* <div className="provi"> */}
       <main className="main bg-dark">
         <section className="sign-in-content">
           <i className="fa fa-user-circle sign-in-icon"></i>
           <h1>Sign In</h1>
-          <form>
-            <div className="input-wrapper">
-              <label htmlFor="username">Username</label>
-              <input type="text" id="username" />
+          {/* <div className="col-md-12 login-form">
+    <div className="card card-container"> 
+        <img
+          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+          alt="profile-img"
+          className="profile-img-card"
+        /> */}
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleLogin}
+          >
+            <Form>
+              <div className="input-wrapper">
+                <label htmlFor="username">Username</label>
+                <Field name="username" type="text" className="form-control" />
+                <ErrorMessage
+                  name="username"
+                  component="div"
+                  className="alert alert-danger"
+                />
+              </div>
+
+              <div className="input-wrapper">
+                <label htmlFor="password">Password</label>
+                <Field
+                  name="password"
+                  type="password"
+                  className="form-control"
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="alert alert-danger"
+                />
+              </div>
+              <div className="input-remember">
+                <input type="checkbox" id="remember-me" />
+                <label htmlFor="remember-me">Remember me</label>
+              </div>
+
+              <div className="input-wrapper">
+                <button
+                  type="submit"
+                  // className="btn btn-primary btn-block"
+                  className="sign-in-button"
+                  disabled={loading}
+                >
+                  {loading && (
+                    // <span className="spinner-border spinner-border-sm"></span>
+                    <p>loading...</p>
+                  )}
+                  <span>Sign In</span>
+                </button>
+              </div>
+            </Form>
+          </Formik>
+          {/* </div> */}
+
+          {message && (
+            <div className="form-group">
+              <div className="alert alert-danger" role="alert">
+                {message}
+              </div>
             </div>
-            <div className="input-wrapper">
-              <label htmlFor="password">Password</label>
-              <input type="password" id="password" />
-            </div>
-            <div className="input-remember">
-              <input type="checkbox" id="remember-me" />
-              <label htmlFor="remember-me">Remember me</label>
-            </div>
-            {/* <!-- PLACEHOLDER DUE TO STATIC SITE --> */}
-            <a href="./user.html" className="sign-in-button">
-              Sign In
-            </a>
-            {/* <!-- SHOULD BE THE BUTTON BELOW -->
-          <!-- <button className="sign-in-button">Sign In</button> -->
-          <!--  --> */}
-          </form>
+          )}
         </section>
       </main>
-      {/* </div> */}
       <Footer />
     </div>
   )
 }
+
+export default Login
