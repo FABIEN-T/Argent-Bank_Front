@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
+
 import '../main.css'
 import LogoArgentBank from '../img/argentBankLogo.png'
 
-export default function Header() {
+export default function UserHeader() {
   return (
     <nav className="main-nav">
       <Link to="/" className="main-nav-logo">
@@ -13,9 +14,14 @@ export default function Header() {
         />
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
-      <Link to="/login" className="main-nav-item">
-        <i className="fa fa-user-circle"></i> Sign In
-      </Link>
+      <div>
+        <Link to="/" className="main-nav-item">
+          <i className="fa fa-user-circle"></i> Tony{' '}
+        </Link>
+        <Link to="/" className="main-nav-item">
+          <i className="fa fa-sign-out"></i> Sign Out
+        </Link>
+      </div>
     </nav>
   )
 }

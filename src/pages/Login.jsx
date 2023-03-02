@@ -7,7 +7,7 @@ import React from 'react'
 
 import '../main.css'
 
-export default function Signup() {
+export default function Login() {
   //   const {
   //     register,
   //     handleSubmit,
@@ -17,7 +17,7 @@ export default function Signup() {
   //   console.log(errors)
 
   return (
-    <>
+    <div className="container">
       <Header />
       {/* <main classNameName="main bg-dark">
         <section classNameName="sign-in-content">
@@ -80,6 +80,6 @@ export default function Signup() {
       </main>
       {/* </div> */}
       <Footer />
-    </>
+    </div>
   )
 }

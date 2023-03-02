@@ -1,0 +1,33 @@
+.error {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding-top: 160px;
+  &__titleError {
+    color: red;
+    margin: 0 auto;
+    font: {
+      size: 200px;
+      weight: 700;
+    }
+  }
+  &__paragraph {
+    margin: 0 auto 160px;
+    color: black;
+    font: {
+      size: 36px;
+      weight: 500;
+    }
+  }
+  &__errorLink {
+    margin: 0 auto;
+    color: black;
+    font: {
+      size: 36px;
+      weight: 500;
+    }
+    &:hover {
+      color: red;
+    }
+  }
+}
