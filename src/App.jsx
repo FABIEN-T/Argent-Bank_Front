@@ -1,36 +1,107 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import './main.css'
+import React, { useEffect, useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+// import store from './storeRedux/store'
+// import 'bootstrap/dist/css/bootstrap.min.css'
+// import './App.css'
 
-// import Header from './components/Header'
-import Home from './pages/Home.jsx'
-import Login from './pages/Login.jsx'
-import PrivateRoute from './components/PrivateRoute'
-import Profile from './pages/Profile.jsx'
-import Error from './pages/Error.jsx'
-// import Footer from './components/Footer'
-// import Profil from './pages/Profil'
-// import Error from './pages/Error'
+import Login from './pages/Login'
+// import Register from './pages/Register'
+import Home from './pages/Home'
+import Profile from './pages/Profile'
 
-export default function App() {
+import { logout } from './storeRedux/auth'
+
+import { useStore } from 'react-redux'
+
+// import EventBus from './rangement/common/Eventbus.js'
+
+function App() {
+  // const { user: currentUser } = useSelector((state) => state.auth)
+  // const dispatch = useDispatch()
+
+  // const logOut = useCallback(() => {
+  //   dispatch(logout())
+  // }, [dispatch])
+
+  // useEffect(() => {
+  //   console.log('currentUser', currentUser)
+  //   EventBus.on('logout', () => {
+  //     logOut()
+  //   })
+
+  //   return () => {
+  //     EventBus.remove('logout')
+  //   }
+  // }, [currentUser, logOut])
+  const viewStore = useStore()
+  console.log('APP isLoginOk', viewStore.getState().isLoginOk)
+
   return (
-    <BrowserRouter>
-      <div className="app">
-        {/* <Header /> */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          {/* <Route
-            path="/profile"
-            element={
-              // <PrivateRoute>
-              <Profile />
-              // </PrivateRoute>
-            }
-          /> */}
-          <Route path="*" element={<Error errorNumber={404} />} />
-        </Routes>
-        {/* <Footer /> */}
+    <Router>
+      <div>
+        {/* <nav>
+          <Link to={'/'} className="navbar-brand">
+            bezKoder
+          </Link>
+          <div className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <Link to={'/home'} className="nav-link">
+                Home
+              </Link>
+            </li>
+
+            {currentUser && (
+              <li className="nav-item">
+                <Link to={'/user'} className="nav-link">
+                  User
+                </Link>
+              </li>
+            )}
+          </div>
+
+          {currentUser ? (
+            <div className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link to={'/profile'} className="nav-link">
+                  {currentUser.username}
+                </Link>
+              </li>
+              <li className="nav-item">
+                <a href="/login" className="nav-link" onClick={logOut}>
+                  LogOut
+                </a>
+              </li>
+            </div>
+          ) : (
+            <div className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link to={'/login'} className="nav-link">
+                  Login
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link to={'/register'} className="nav-link">
+                  Sign Up
+                </Link>
+              </li>
+            </div>
+          )}
+        </nav> */}
+
+        <div>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            {/* <Route path="/register" element={<Register />} /> */}
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </div>
       </div>
-    </BrowserRouter>
+    </Router>
   )
 }
+
+export default App

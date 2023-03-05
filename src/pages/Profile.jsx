@@ -3,6 +3,9 @@ import UserWelcome from '../components/UserWelcome.jsx'
 import UserTransaction from '../components/UserTransaction.jsx'
 import Footer from '../components/Footer.jsx'
 // import LogoArgentBank from '../img/argentBankLogo.png'
+import { useNavigate } from 'react-router-dom'
+import { useStore } from 'react-redux'
+import store from '../storeRedux/store'
 
 export default function Profile() {
   const datasAccount = [
@@ -25,6 +28,14 @@ export default function Profile() {
       transactionBtn: 'View transactions',
     },
   ]
+  const navigate = useNavigate
+  // const viewStore = useStore
+  // console.log('Profile isLoginOk', viewStore.getState().isLoginOk)
+  console.log('Profile isLoginOk', store.getState().isLoginOk)
+
+  // return store.getState().isLoginOk ? (
+  //   navigate('/login')
+  // ) : (
   return (
     <div className="container">
       <UserHeader />

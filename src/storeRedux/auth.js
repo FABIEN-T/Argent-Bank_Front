@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { setMessage } from './message'
+// import { setMessage } from './message'
 
 import AuthService from '../services/auth.service'
 
@@ -7,10 +7,15 @@ const user = JSON.parse(localStorage.getItem('user'))
 
 export const register = createAsyncThunk(
   'auth/register',
-  async ({ username, email, password }, thunkAPI) => {
+  async ({ email, password, firstName, lastName }, { rejectWithValue }) => {
     try {
-      const response = await AuthService.register(username, email, password)
-      thunkAPI.dispatch(setMessage(response.data.message))
+      const response = await AuthService.register(
+        email,
+        password,
+        firstName,
+        lastName
+      )
+      // thunkAPI.dispatch(setMessage(response.data.message))
       return response.data
     } catch (error) {
       const message =
@@ -19,27 +24,30 @@ export const register = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString()
-      thunkAPI.dispatch(setMessage(message))
-      return thunkAPI.rejectWithValue()
+      // thunkAPI.dispatch(setMessage(message))
+      return rejectWithValue({ message })
     }
   }
 )
 
 export const login = createAsyncThunk(
   'auth/login',
-  async ({ username, password }, thunkAPI) => {
+  async ({ email, password }, { rejectWithValue }) => {
     try {
-      const data = await AuthService.login(username, password)
+      const data = await AuthService.login(email, password)
+      console.log('HEY data', data)
       return { user: data }
     } catch (error) {
+      console.log('Catch Error', error)
       const message =
         (error.response &&
           error.response.data &&
           error.response.data.message) ||
         error.message ||
         error.toString()
-      thunkAPI.dispatch(setMessage(message))
-      return thunkAPI.rejectWithValue()
+      // thunkAPI.dispatch(setMessage(message))
+      console.log('login: catch de middleware', message)
+      return rejectWithValue({ message })
     }
   }
 )
@@ -47,10 +55,13 @@ export const login = createAsyncThunk(
 export const logout = createAsyncThunk('auth/logout', async () => {
   await AuthService.logout()
 })
+// const initialState = user
+//   ? { isLoggedIn: true, user }
+//   : { isLoggedIn: false, user: null }
 
-const initialState = user
-  ? { isLoggedIn: true, user }
-  : { isLoggedIn: false, user: null }
+const initialState = {
+  isLoginOk: false,
+}
 
 const authSlice = createSlice({
   name: 'auth',
@@ -65,6 +76,7 @@ const authSlice = createSlice({
     [login.fulfilled]: (state, action) => {
       state.isLoggedIn = true
       state.user = action.payload.user
+      state.isLoginOk = true
     },
     [login.rejected]: (state, action) => {
       state.isLoggedIn = false

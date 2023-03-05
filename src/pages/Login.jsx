@@ -5,7 +5,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 
 import { login } from '../storeRedux/auth'
-import { clearMessage } from '../storeRedux/message'
+// import { clearMessage } from '../storeRedux/message'
 
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
@@ -16,44 +16,45 @@ const Login = () => {
   const [loading, setLoading] = useState(false)
 
   const { isLoggedIn } = useSelector((state) => state.auth)
-  const { message } = useSelector((state) => state.message)
+  // const { message } = useSelector((state) => state.message)
 
-  console.log('isLoggedIn', isLoggedIn)
+  console.log('Login isLoggedIn', isLoggedIn)
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(clearMessage())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(clearMessage())
+  // }, [dispatch])
 
   const initialValues = {
-    username: '',
+    email: '',
     password: '',
   }
 
   const validationSchema = Yup.object().shape({
-    username: Yup.string().required('This field is required!'),
+    email: Yup.string().required('This field is required!'),
     password: Yup.string().required('This field is required!'),
   })
 
   const handleLogin = (formValue) => {
-    const { username, password } = formValue
+    const { email, password } = formValue
+    console.log('Login', email, password)
     setLoading(true)
 
-    dispatch(login({ username, password }))
+    dispatch(login({ email, password }))
       .unwrap()
-      .then(() => {
-        navigate('/profile')
-        window.location.reload()
-      })
+      // .then(() => {
+      //   navigate('/profile')
+      //   window.location.reload()
+      // })
       .catch(() => {
         setLoading(false)
       })
   }
 
-  if (isLoggedIn) {
-    return <Navigate to="/profile" />
-  }
+  // if (isLoggedIn) {
+  //   return <Navigate to="/profile" />
+  // }
 
   return (
     <div className="container">
@@ -76,10 +77,17 @@ const Login = () => {
           >
             <Form>
               <div className="input-wrapper">
-                <label htmlFor="username">Username</label>
-                <Field name="username" type="text" className="form-control" />
+                {/* <label htmlFor="email">Username</label>
+                <Field name="email" type="email" className="form-control" />
                 <ErrorMessage
-                  name="username"
+                  name="email"
+                  type="email"
+                  className="alert alert-danger"
+                /> */}
+                <label htmlFor="email">Username</label>
+                <Field name="email" type="email" className="form-control" />
+                <ErrorMessage
+                  name="email"
                   component="div"
                   className="alert alert-danger"
                 />
@@ -121,13 +129,13 @@ const Login = () => {
           </Formik>
           {/* </div> */}
 
-          {message && (
+          {/* {message && (
             <div className="form-group">
               <div className="alert alert-danger" role="alert">
                 {message}
               </div>
             </div>
-          )}
+          )} */}
         </section>
       </main>
       <Footer />
