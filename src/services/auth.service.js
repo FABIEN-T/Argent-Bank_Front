@@ -2,17 +2,8 @@ import axios from 'axios'
 
 const API_URL = 'http://localhost:3001/api/v1/user/'
 
-const register = (email, password, firstName, lastName) => {
-  return axios.post(API_URL + 'signup', {
-    email: email,
-    password: password,
-    firstName: firstName,
-    lastName: lastName,
-  })
-}
-
-const login = (email, password) => {
-  console.log('axios login !')
+export const serviceLogin = (email, password) => {
+  console.log('axios serviceLogin !')
   return axios
     .post(API_URL + 'login', {
       email: email,
@@ -30,64 +21,25 @@ const login = (email, password) => {
     })
 }
 
-// const getName = (firstName, lastName) => {
-//   console.log('axios !')
-//   return axios
-//     .get(API_URL + 'login', {
-//       firstName: firstName,
-//       lastName: lastName,
-//     })
-//     .then((response) => {
-//       if (response.data.accessToken) {
-//         localStorage.setItem('user', JSON.stringify(response.data))
-//       }
-
-//       return response.data
-//     })
-// }
-
-const getProfile = (firstName, lastName) => {
-  return axios.put(API_URL + 'profile', {
-    firstName: firstName,
-    lastName: lastName,
-  })
+export const serviceGetUserName = (profileData, token) => {
+  console.log('axios getUserName!')
+  const headerConfig = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  return axios
+    .post(
+      'http://localhost:3001/api/v1/user/profile',
+      profileData,
+      headerConfig
+    )
+    .then((res) => {
+      console.log('getUserName data', res.data.body)
+      return res.data.body
+    })
+    .catch((error) => {
+      // console.log('error ds user profile', error)
+      return error
+    })
 }
-
-// export const userProfile = async (profileData, token) => {
-//   const config = {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   }
-//   return await axios
-//     .post('http://localhost:3001/api/v1/user/profile', profileData, config)
-//     .then((res) => {
-//       //retourne les infos du user nom, prenom, mail...
-//       // console.log('les datas ds authService', res.data.body)
-//       return res.data.body
-//     })
-//     .catch((error) => {
-//       // console.log('error ds user profile', error)
-//       return error
-//     })
-// }
-
-const editProfile = (firstName, lastName) => {
-  return axios.put(API_URL + 'profile', {
-    firstName: firstName,
-    lastName: lastName,
-  })
-}
-
-const logout = () => {
-  localStorage.removeItem('user')
-}
-
-const authService = {
-  register,
-  login,
-  editProfile,
-  logout,
-}
-
-export default authService

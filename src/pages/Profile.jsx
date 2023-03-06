@@ -4,8 +4,9 @@ import UserTransaction from '../components/UserTransaction.jsx'
 import Footer from '../components/Footer.jsx'
 // import LogoArgentBank from '../img/argentBankLogo.png'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import store from '../storeRedux/store'
+import { thunkGetUserName } from '../storeRedux/auth'
 
 export default function Profile() {
   const datasAccount = [
@@ -28,9 +29,11 @@ export default function Profile() {
       transactionBtn: 'View transactions',
     },
   ]
-  const navigate = useNavigate
+  const dispatch = useDispatch()
+  // const navigate = useNavigate
   const { isLoginOk } = useSelector((state) => state.auth)
-  console.log('APP isLoginOk', isLoginOk)
+  console.log('Profile isLoginOk', isLoginOk)
+  // dispatch(thunkGetUserName())
 
   return (
     <div className="container">

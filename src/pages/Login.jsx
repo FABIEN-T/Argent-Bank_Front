@@ -4,7 +4,7 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 
-import { login } from '../storeRedux/auth'
+import { thunkLogin } from '../storeRedux/auth'
 // import { clearMessage } from '../storeRedux/message'
 
 import Header from '../components/Header.jsx'
@@ -19,11 +19,7 @@ const Login = () => {
   // const { message } = useSelector((state) => state.message)
 
   const dispatch = useDispatch()
-  const myStore = useStore()
-  const viewMaVariable = myStore.getState().maVariable
-  useEffect(() => {
-    console.log('Login.jsx maVariable', viewMaVariable)
-  })
+
   // useEffect(() => {
   //   dispatch(clearMessage())
   // }, [dispatch])
@@ -43,7 +39,7 @@ const Login = () => {
     console.log('Login', email, password)
     setLoading(true)
 
-    dispatch(login({ email, password }))
+    dispatch(thunkLogin({ email, password }))
       .unwrap()
       // .then(() => {
       //   navigate('/profile')
@@ -53,10 +49,6 @@ const Login = () => {
         setLoading(false)
       })
   }
-
-  // if (isLoggedIn) {
-  //   return <Navigate to="/profile" />
-  // }
 
   return (
     <div className="container">

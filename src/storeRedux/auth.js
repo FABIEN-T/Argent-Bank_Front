@@ -2,42 +2,16 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { useEffect } from 'react'
 // import { setMessage } from './message'
 
-import AuthService from '../services/auth.service'
+import { serviceLogin, serviceGetUserName } from '../services/auth.service'
 
 const user = JSON.parse(localStorage.getItem('user'))
 
-export const register = createAsyncThunk(
-  'auth/register',
-  async ({ email, password, firstName, lastName }, { rejectWithValue }) => {
-    try {
-      const response = await AuthService.register(
-        email,
-        password,
-        firstName,
-        lastName
-      )
-      // thunkAPI.dispatch(setMessage(response.data.message))
-      return response.data
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString()
-      // thunkAPI.dispatch(setMessage(message))
-      return rejectWithValue({ message })
-    }
-  }
-)
-
-export const login = createAsyncThunk(
+export const thunkLogin = createAsyncThunk(
   'auth/login',
-  async ({ email, password }, { getState, rejectWithValue }) => {
+  async ({ email, password }, { rejectWithValue }) => {
     try {
-      const data = await AuthService.login(email, password)
-      console.log('login data', data)
-      console.log('login isLoginOk', getState().isLoginOk)
+      const data = await serviceLogin(email, password)
+      console.log('auth/login data', data)
       return { user: data }
     } catch (error) {
       console.log('Catch Error', error)
@@ -48,49 +22,73 @@ export const login = createAsyncThunk(
         error.message ||
         error.toString()
       // thunkAPI.dispatch(setMessage(message))
-      console.log('login: catch de middleware', message)
+      console.log('catch middleware login :', message)
       return rejectWithValue({ message })
     }
   }
 )
 
-export const logout = createAsyncThunk('auth/logout', async () => {
-  await AuthService.logout()
-})
-// const initialState = user
-//   ? { isLoggedIn: true, user }
-//   : { isLoggedIn: false, user: null }
+export const thunkGetUserName = createAsyncThunk(
+  'auth/userProfile',
+  async (profileData, { getState, rejectWithValue }) => {
+    try {
+      const token = getState().token
+      const { dataName } = await serviceGetUserName(profileData, token)
+      console.log('auth/userProfile dataName', profileData)
+      return { dataName }
+    } catch (error) {
+      console.log('Catch Error', error)
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      // thunkAPI.dispatch(setMessage(message))
+      console.log('catch middleware userProfile :', message)
+      return rejectWithValue({ message })
+    }
+  }
+)
 
 const initialState = {
   isLoginOk: false,
   user: null,
+  firstName: '',
+  lastName: '',
   maVariable: 'coucou ma variable',
+  token: '',
 }
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   extraReducers: {
-    [register.fulfilled]: (state, action) => {
-      state.isLoggedIn = false
-    },
-    [register.rejected]: (state, action) => {
-      state.isLoggedIn = false
-    },
-    [login.fulfilled]: (state, action) => {
+    // [register.fulfilled]: (state, action) => {
+    //   state.isLoggedIn = false
+    // },
+    // [register.rejected]: (state, action) => {
+    //   state.isLoggedIn = false
+    // },
+    [thunkLogin.fulfilled]: (state, action) => {
       state.isLoggedIn = true
       state.user = action.payload.user
+      state.token = action.payload.token
       state.isLoginOk = true
-      state.maVariable = action.payload.user
+      state.maVariable = 'tout change !'
     },
-    [login.rejected]: (state, action) => {
+    [thunkLogin.rejected]: (state, action) => {
       state.isLoggedIn = false
       state.user = null
     },
-    [logout.fulfilled]: (state, action) => {
-      state.isLoggedIn = false
-      state.user = null
+    [thunkGetUserName.fulfilled]: (state, action) => {
+      state.firstName = action.payload.firstName
+      state.lastName = action.payload.lastName
     },
+    // [logout.fulfilled]: (state, action) => {
+    //   state.isLoggedIn = false
+    //   state.user = null
+    // },
   },
 })
 

@@ -12,8 +12,6 @@ import Profile from './pages/Profile'
 
 import { logout } from './storeRedux/auth'
 
-import { useStore } from 'react-redux'
-
 // import EventBus from './rangement/common/Eventbus.js'
 
 function App() {
@@ -36,10 +34,14 @@ function App() {
   // }, [currentUser, logOut])
   // const viewStore = useStore()
   // console.log('APP isLoginOk', viewStore.getState().isLoginOk)
-  const { isLoginOk, maVariable } = useSelector((state) => state.auth)
+
+  const { isLoginOk, maVariable, firstName, lastName } = useSelector(
+    (state) => state.auth
+  )
   useEffect(() => {
     console.log('APP isLoginOk', isLoginOk)
     console.log('APP maVariable', maVariable)
+    console.log('APP dataName', firstName, lastName)
   })
 
   return (
