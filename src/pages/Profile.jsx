@@ -4,7 +4,7 @@ import UserTransaction from '../components/UserTransaction.jsx'
 import Footer from '../components/Footer.jsx'
 // import LogoArgentBank from '../img/argentBankLogo.png'
 import { useNavigate } from 'react-router-dom'
-import { useStore } from 'react-redux'
+import { useSelector } from 'react-redux'
 import store from '../storeRedux/store'
 
 export default function Profile() {
@@ -29,15 +29,12 @@ export default function Profile() {
     },
   ]
   const navigate = useNavigate
-  // const viewStore = useStore
-  // console.log('Profile isLoginOk', viewStore.getState().isLoginOk)
-  console.log('Profile isLoginOk', store.getState().isLoginOk)
+  const { isLoginOk } = useSelector((state) => state.auth)
+  console.log('APP isLoginOk', isLoginOk)
 
-  // return store.getState().isLoginOk ? (
-  //   navigate('/login')
-  // ) : (
   return (
     <div className="container">
+      {console.log('inProfile')}
       <UserHeader />
       <main className="main bg-dark">
         <UserWelcome firstName={'Tony'} lastName={'Jarvis'} />

@@ -34,8 +34,13 @@ function App() {
   //     EventBus.remove('logout')
   //   }
   // }, [currentUser, logOut])
-  const viewStore = useStore()
-  console.log('APP isLoginOk', viewStore.getState().isLoginOk)
+  // const viewStore = useStore()
+  // console.log('APP isLoginOk', viewStore.getState().isLoginOk)
+  const { isLoginOk, maVariable } = useSelector((state) => state.auth)
+  useEffect(() => {
+    console.log('APP isLoginOk', isLoginOk)
+    console.log('APP maVariable', maVariable)
+  })
 
   return (
     <Router>

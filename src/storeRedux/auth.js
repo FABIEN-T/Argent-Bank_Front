@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { useEffect } from 'react'
 // import { setMessage } from './message'
 
 import AuthService from '../services/auth.service'
@@ -32,10 +33,11 @@ export const register = createAsyncThunk(
 
 export const login = createAsyncThunk(
   'auth/login',
-  async ({ email, password }, { rejectWithValue }) => {
+  async ({ email, password }, { getState, rejectWithValue }) => {
     try {
       const data = await AuthService.login(email, password)
-      console.log('HEY data', data)
+      console.log('login data', data)
+      console.log('login isLoginOk', getState().isLoginOk)
       return { user: data }
     } catch (error) {
       console.log('Catch Error', error)
@@ -61,6 +63,8 @@ export const logout = createAsyncThunk('auth/logout', async () => {
 
 const initialState = {
   isLoginOk: false,
+  user: null,
+  maVariable: 'coucou ma variable',
 }
 
 const authSlice = createSlice({
@@ -77,6 +81,7 @@ const authSlice = createSlice({
       state.isLoggedIn = true
       state.user = action.payload.user
       state.isLoginOk = true
+      state.maVariable = action.payload.user
     },
     [login.rejected]: (state, action) => {
       state.isLoggedIn = false

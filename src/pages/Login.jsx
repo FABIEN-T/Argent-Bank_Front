@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector, useStore } from 'react-redux'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
@@ -18,10 +18,12 @@ const Login = () => {
   const { isLoggedIn } = useSelector((state) => state.auth)
   // const { message } = useSelector((state) => state.message)
 
-  console.log('Login isLoggedIn', isLoggedIn)
-
   const dispatch = useDispatch()
-
+  const myStore = useStore()
+  const viewMaVariable = myStore.getState().maVariable
+  useEffect(() => {
+    console.log('Login.jsx maVariable', viewMaVariable)
+  })
   // useEffect(() => {
   //   dispatch(clearMessage())
   // }, [dispatch])
