@@ -10,8 +10,6 @@ import { thunkGetUserName } from '../storeRedux/auth'
 import { useEffect } from 'react'
 
 export default function Profile() {
-  const dispatch = useDispatch()
-
   const datasAccount = [
     {
       title: 'Argent Bank Checking (x8349)',
@@ -41,18 +39,23 @@ export default function Profile() {
   // console.log('Profile Name', isLoginOk, firstName, lastName)
   // const firstName = "Tony"
   const myStore = useStore()
-  useEffect(() => {
-    const { firstName, lastName } = dispatch(thunkGetUserName())
-    console.log('PROFILE STATE', myStore.getState().auth)
-    console.log('PROFILE useEffect', firstName, lastName)
-  })
+  const dispatch = useDispatch()
+
+  // useEffect(() => {
+  // dispatch(thunkGetUserName())
+  // const { dataName } = dispatch(thunkGetUserName())
+  console.log('PROFILE STATE', myStore.getState().auth)
+  // console.log('PROFILE useEffect', firstName, lastName)
+  // console.log('PROFILE dataName', dataName)
+  // })
+  const { firstName, lastName } = useSelector((state) => state.auth)
+  console.log('Profile all Name', firstName, lastName)
 
   return (
     <div className="container">
       <UserHeader />
       <main className="main bg-dark">
-        <UserWelcome firstName={'Tony'} lastName={'Jarvis'} />
-
+        <UserWelcome firstName={firstName} lastName={lastName} />
         <h2 className="sr-only">Accounts</h2>
         {datasAccount.map((object) => (
           <UserTransaction

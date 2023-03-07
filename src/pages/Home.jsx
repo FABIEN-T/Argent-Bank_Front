@@ -11,19 +11,18 @@ import { setTokenAction, thunkGetUserName } from '../storeRedux/auth'
 import '../main.css'
 
 export default function Home() {
-  const dispatch = useDispatch()
-  const typeStorage = false // true: localStorage || false: sessionStorage
-  const tokenStorage = getTokenStorage(typeStorage)
-    ? getTokenStorage(typeStorage)
-    : null
+  // const dispatch = useDispatch()
+  // const typeStorage = false // true: localStorage || false: sessionStorage
+  // const tokenStorage = getTokenStorage(typeStorage)
+  //   ? getTokenStorage(typeStorage)
+  //   : null
 
-  useEffect(() => {
-    console.log('HOME tokenStorage', tokenStorage)
-    if (tokenStorage !== null) {
-      dispatch(setTokenAction(tokenStorage))
-      dispatch(thunkGetUserName())
-    }
-  })
+  // useEffect(() => {
+  //   console.log('HOME tokenStorage', tokenStorage)
+  //   if (tokenStorage !== null) {
+  //     dispatch(setTokenAction(tokenStorage))
+  //   }
+  // })
 
   return (
     <div className="container">

@@ -12,7 +12,8 @@ export const thunkLogin = createAsyncThunk(
     try {
       const data = await serviceLogin(email, password)
       console.log('auth/login data', data)
-      return { user: data }
+      // return { user: data }
+      return { data }
     } catch (error) {
       console.log('Catch Error', error)
       const message =
@@ -30,14 +31,17 @@ export const thunkLogin = createAsyncThunk(
 
 export const thunkGetUserName = createAsyncThunk(
   'auth/getUserName',
-  async ({ firstName, lastName }, { getState, rejectWithValue }) => {
+  async (payloadUserProfile, { rejectWithValue }) => {
     try {
       console.log('auth/getUserName !!!!!!!!!')
-      const { data } = await serviceGetUserName()
-      firstName = data.firstName
-      lastName = data.lastName
-      console.log('auth/getUserName dataName', data.firstName, data.lastName)
-      return { firstName, lastName }
+      // const dataName = await serviceGetUserName(dataUserProfile)
+      // firstName = data.firstName
+      // lastName = data.lastName
+      // console.log('auth/getUserName dataName', data.firstName, data.lastName)
+      // return { firstName, lastName }
+      // console.log('auth/getUserName dataName', dataName)
+      // return dataName
+      return await serviceGetUserName(payloadUserProfile)
     } catch (error) {
       console.log('Catch Error', error)
       const message =
@@ -54,36 +58,36 @@ export const thunkGetUserName = createAsyncThunk(
 
 const initialState = {
   isLoginOk: false,
-  user: null,
+  // user: null,
   firstName: '',
   lastName: '',
   maVariable: 'coucou ma variable',
-  token: null,
+  // token: null,
 }
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {
-    setTokenAction: (state, action) => {
-      state.token = action.payload
-    },
-  },
+  // reducers: {
+  //   setTokenAction: (state, action) => {
+  //     state.token = action.payload
+  //   },
+  // },
   extraReducers: {
     [thunkLogin.fulfilled]: (state, action) => {
       state.isLoggedIn = true
-      state.user = action.payload.user
-      state.token = action.payload.token
+      // state.user = action.payload.user
+      // state.token = action.payload.token
       state.isLoginOk = true
-      state.maVariable = 'tout change !'
+      state.maVariable = 'Login Ok !'
     },
     [thunkLogin.rejected]: (state, action) => {
-      state.isLoggedIn = false
-      state.user = null
+      state.isLoginOk = false
+      // state.user = null
     },
     [thunkGetUserName.fulfilled]: (state, action) => {
-      state.maVariable = 'toujours là !'
-      state.isLoginOk = true
+      state.maVariable = 'Profile OK !'
+      // state.isLoginOk = true
       state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
     },
@@ -94,6 +98,6 @@ const authSlice = createSlice({
   },
 })
 
-export const { setTokenAction } = authSlice.actions
+// export const { setTokenAction } = authSlice.actions
 const { reducer } = authSlice
 export default reducer

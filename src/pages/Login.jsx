@@ -44,12 +44,12 @@ const Login = () => {
       .unwrap()
       .then(() => {
         navigate('/profile')
-        window.location.reload()
+        // window.location.reload()
       })
       .catch(() => {
         setLoading(false)
       })
-    // dispatch(thunkGetUserName())
+    dispatch(thunkGetUserName())
   }
 
   return (
