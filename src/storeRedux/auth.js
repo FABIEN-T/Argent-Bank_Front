@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 
 import { serviceLogin, serviceGetUserName } from '../services/auth.service'
 
-const user = JSON.parse(localStorage.getItem('user'))
+// const user = JSON.parse(localStorage.getItem('user'))
 
 export const thunkLogin = createAsyncThunk(
   'auth/login',
@@ -29,13 +29,15 @@ export const thunkLogin = createAsyncThunk(
 )
 
 export const thunkGetUserName = createAsyncThunk(
-  'auth/userProfile',
-  async (profileData, { getState, rejectWithValue }) => {
+  'auth/getUserName',
+  async ({ firstName, lastName }, { getState, rejectWithValue }) => {
     try {
-      const token = getState().token
-      const { dataName } = await serviceGetUserName(profileData, token)
-      console.log('auth/userProfile dataName', profileData)
-      return { dataName }
+      console.log('auth/getUserName !!!!!!!!!')
+      const { data } = await serviceGetUserName()
+      firstName = data.firstName
+      lastName = data.lastName
+      console.log('auth/getUserName dataName', data.firstName, data.lastName)
+      return { firstName, lastName }
     } catch (error) {
       console.log('Catch Error', error)
       const message =
@@ -44,7 +46,6 @@ export const thunkGetUserName = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString()
-      // thunkAPI.dispatch(setMessage(message))
       console.log('catch middleware userProfile :', message)
       return rejectWithValue({ message })
     }
@@ -57,19 +58,18 @@ const initialState = {
   firstName: '',
   lastName: '',
   maVariable: 'coucou ma variable',
-  token: '',
+  token: null,
 }
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
+  reducers: {
+    setTokenAction: (state, action) => {
+      state.token = action.payload
+    },
+  },
   extraReducers: {
-    // [register.fulfilled]: (state, action) => {
-    //   state.isLoggedIn = false
-    // },
-    // [register.rejected]: (state, action) => {
-    //   state.isLoggedIn = false
-    // },
     [thunkLogin.fulfilled]: (state, action) => {
       state.isLoggedIn = true
       state.user = action.payload.user
@@ -82,6 +82,8 @@ const authSlice = createSlice({
       state.user = null
     },
     [thunkGetUserName.fulfilled]: (state, action) => {
+      state.maVariable = 'toujours là !'
+      state.isLoginOk = true
       state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
     },
@@ -92,31 +94,6 @@ const authSlice = createSlice({
   },
 })
 
-// const authSlice = createSlice({
-//   name: "auth",
-//   initialState,
-//   extraReducers: builder => {
-//     builder
-//       .addCase(register.fulfilled, (state, action) => {
-//       state.isLoggedIn = false;
-//     })
-//       .addCase(register.rejected, (state, action) => {
-//       state.isLoggedIn = false;
-//     })
-//     .addCase(login.fulfilled, (state, action) => {
-//       state.isLoggedIn = true;
-//       state.user = action.payload.user;
-//     })
-//     .addCase(login.rejected, (state, action) => {
-//       state.isLoggedIn = false;
-//       state.user = null;
-//     })
-//     .addCase(logout.fulfille, (state, action) => {
-//       state.isLoggedIn = false;
-//       state.user = null;
-//     })
-//   },
-// });
-
+export const { setTokenAction } = authSlice.actions
 const { reducer } = authSlice
 export default reducer

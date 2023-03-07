@@ -4,21 +4,20 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 
-import { thunkLogin } from '../storeRedux/auth'
-// import { clearMessage } from '../storeRedux/message'
+import { thunkLogin, thunkGetUserName } from '../storeRedux/auth'
+import { setToken } from '../utils/tokenStorageFunctions'
 
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 
 const Login = () => {
-  let navigate = useNavigate()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const [loading, setLoading] = useState(false)
 
   const { isLoggedIn } = useSelector((state) => state.auth)
   // const { message } = useSelector((state) => state.message)
-
-  const dispatch = useDispatch()
 
   // useEffect(() => {
   //   dispatch(clearMessage())
@@ -34,20 +33,23 @@ const Login = () => {
     password: Yup.string().required('This field is required!'),
   })
 
+  // const { token } = useSelector((state) => state.auth)
+
   const handleLogin = (formValue) => {
     const { email, password } = formValue
-    console.log('Login', email, password)
+    // console.log('Login', email, password)
     setLoading(true)
 
     dispatch(thunkLogin({ email, password }))
       .unwrap()
-      // .then(() => {
-      //   navigate('/profile')
-      //   window.location.reload()
-      // })
+      .then(() => {
+        navigate('/profile')
+        window.location.reload()
+      })
       .catch(() => {
         setLoading(false)
       })
+    // dispatch(thunkGetUserName())
   }
 
   return (

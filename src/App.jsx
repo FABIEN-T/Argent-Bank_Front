@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector, useStore } from 'react-redux'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 // import store from './storeRedux/store'
 // import 'bootstrap/dist/css/bootstrap.min.css'
@@ -11,22 +11,12 @@ import Home from './pages/Home'
 import Profile from './pages/Profile'
 
 import { logout } from './storeRedux/auth'
+import { thunkGetUserName } from './storeRedux/auth'
 
 // import EventBus from './rangement/common/Eventbus.js'
 
 function App() {
-  // const { user: currentUser } = useSelector((state) => state.auth)
-  // const dispatch = useDispatch()
-
-  // const logOut = useCallback(() => {
-  //   dispatch(logout())
-  // }, [dispatch])
-
-  // useEffect(() => {
-  //   console.log('currentUser', currentUser)
-  //   EventBus.on('logout', () => {
-  //     logOut()
-  //   })
+  const dispatch = useDispatch()
 
   //   return () => {
   //     EventBus.remove('logout')
@@ -34,15 +24,20 @@ function App() {
   // }, [currentUser, logOut])
   // const viewStore = useStore()
   // console.log('APP isLoginOk', viewStore.getState().isLoginOk)
+  // const myStore = useStore()
 
-  const { isLoginOk, maVariable, firstName, lastName } = useSelector(
-    (state) => state.auth
-  )
-  useEffect(() => {
-    console.log('APP isLoginOk', isLoginOk)
-    console.log('APP maVariable', maVariable)
-    console.log('APP dataName', firstName, lastName)
-  })
+  // const { isLoginOk, maVariable, firstName, lastName } = useSelector(
+  //   (state) => state.auth
+  // )
+  // useEffect(() => {
+  //   console.log('APP, myStore', myStore.getState().auth)
+  //   // console.log('APP isLoginOk', isLoginOk)
+  //   // console.log('APP maVariable', maVariable)
+  //   // const token = localStorage.getItem('token')
+  //   // console.log('App get token', token)
+  //   // dispatch(thunkGetUserName())
+  //   // console.log('APP dataName', firstName, lastName)
+  // })
 
   return (
     <Router>

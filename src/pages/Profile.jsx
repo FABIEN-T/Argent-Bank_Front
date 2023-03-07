@@ -4,11 +4,14 @@ import UserTransaction from '../components/UserTransaction.jsx'
 import Footer from '../components/Footer.jsx'
 // import LogoArgentBank from '../img/argentBankLogo.png'
 import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import store from '../storeRedux/store'
+import { useSelector, useDispatch, useStore } from 'react-redux'
+
 import { thunkGetUserName } from '../storeRedux/auth'
+import { useEffect } from 'react'
 
 export default function Profile() {
+  const dispatch = useDispatch()
+
   const datasAccount = [
     {
       title: 'Argent Bank Checking (x8349)',
@@ -29,15 +32,23 @@ export default function Profile() {
       transactionBtn: 'View transactions',
     },
   ]
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   // const navigate = useNavigate
-  const { isLoginOk } = useSelector((state) => state.auth)
-  console.log('Profile isLoginOk', isLoginOk)
+  // const { isLoginOk } = useSelector((state) => state.auth)
+  // console.log('Profile isLoginOk', isLoginOk)
   // dispatch(thunkGetUserName())
+  // const { firstName, lastName } = useSelector((state) => state.auth)
+  // console.log('Profile Name', isLoginOk, firstName, lastName)
+  // const firstName = "Tony"
+  const myStore = useStore()
+  useEffect(() => {
+    const { firstName, lastName } = dispatch(thunkGetUserName())
+    console.log('PROFILE STATE', myStore.getState().auth)
+    console.log('PROFILE useEffect', firstName, lastName)
+  })
 
   return (
     <div className="container">
-      {console.log('inProfile')}
       <UserHeader />
       <main className="main bg-dark">
         <UserWelcome firstName={'Tony'} lastName={'Jarvis'} />
