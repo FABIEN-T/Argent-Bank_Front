@@ -32,7 +32,7 @@ export const thunkLogin = createAsyncThunk(
   }
 )
 
-export const thunkGetUserName = createAsyncThunk(
+export const thunkGetUserProfile = createAsyncThunk(
   'auth/getUserName',
   async (payloadUserProfile, { rejectWithValue }) => {
     try {
@@ -52,51 +52,48 @@ export const thunkGetUserName = createAsyncThunk(
   }
 )
 
-// export const thunklogout = createAsyncThunk('auth/logout', async () => {
-//   console.log('serviceLogout !!!!')
-//   await sessionStorage.removeItem('token')
-//   // sessionStorage.removeItem('token')
-// })
-
 const initialState = {
   isLoginOk: false,
   firstName: '',
   lastName: '',
+  isToken: false,
   maVariable: 'coucou ma variable',
 }
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: 'authSlice',
   initialState,
   reducers: {
-    // setTokenAction: (state, action) => {
-    //   state.token = action.payload
-    // },
-    // actionLogout: (state) => {
-    //   sessionStorage.removeItem('token')
-    //   state.isLoginOk = false
-    //   state.firstName = ''
-    //   state.lastName = ''
-    //   state.maVariable = 'LOGOUT !'
-    // },
+    actionLogout: (state) => {
+      // sessionStorage.removeItem('token')
+      console.log('!!!! LOGOUT !!!!')
+      // localStorage.clear()
+      state.isLoginOk = false
+      state.firstName = ''
+      state.lastName = ''
+      state.isToken = false
+      state.maVariable = 'LOGOUT !'
+    },
   },
   extraReducers: {
     [thunkLogin.fulfilled]: (state, action) => {
       state.isLoginOk = true
+      state.isToken = true
       state.maVariable = 'Login Ok !'
     },
     [thunkLogin.rejected]: (state, action) => {
       state.isLoginOk = false
       // state.user = null
     },
-    [thunkGetUserName.fulfilled]: (state, action) => {
+    [thunkGetUserProfile.fulfilled]: (state, action) => {
       state.maVariable = 'Profile OK !'
       state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
+      state.isToken = true
     },
   },
 })
 
-// export const { actionLogout } = authSlice.actions
+export const { actionLogout } = authSlice.actions
 const { reducer } = authSlice
 export default reducer

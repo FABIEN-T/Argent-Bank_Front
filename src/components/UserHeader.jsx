@@ -1,21 +1,14 @@
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useSelector, useDispatch, useStore } from 'react-redux'
-// import { actionLogout } from '../storeRedux/auth'
+import { actionLogout } from '../storeRedux/auth'
 
 import '../main.css'
 import LogoArgentBank from '../img/argentBankLogo.png'
 
 export default function UserHeader() {
-  // const myStore = useStore()
-  const { firstName } = useSelector((state) => state.auth)
+  const { firstName, isToken } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
-  // useEffect(() => {
-  // console.log('UserHeader STATE', myStore.getState().auth)
-  // function logout() {
-  //   dispatch(actionLogout())
-  // }
-  // }, [dispatch])
   return (
     <nav className="main-nav">
       <Link to="/" className="main-nav-logo">
@@ -33,7 +26,8 @@ export default function UserHeader() {
         <Link
           to="/"
           className="main-nav-item"
-          // onClick={logout()}
+          // onClick={localStorage.clear()}
+          onClick={dispatch(actionLogout())}
         >
           <i className="fa fa-sign-out"></i> Sign Out
         </Link>

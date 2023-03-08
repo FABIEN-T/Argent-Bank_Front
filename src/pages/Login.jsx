@@ -4,9 +4,10 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 
-import { thunkLogin, thunkGetUserName } from '../storeRedux/auth'
+import { thunkLogin, thunkGetUserProfile } from '../storeRedux/auth'
 import { setToken } from '../utils/tokenStorageFunctions'
 
+import UserHeader from '../components/UserHeader.jsx'
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 
@@ -17,11 +18,6 @@ const Login = () => {
   const [loading, setLoading] = useState(false)
 
   const { isLoggedIn } = useSelector((state) => state.auth)
-  // const { message } = useSelector((state) => state.message)
-
-  // useEffect(() => {
-  //   dispatch(clearMessage())
-  // }, [dispatch])
 
   const initialValues = {
     email: '',
@@ -33,8 +29,6 @@ const Login = () => {
     password: Yup.string().required('This field is required!'),
   })
 
-  // const { token } = useSelector((state) => state.auth)
-
   const handleLogin = (formValue) => {
     const { email, password } = formValue
     // console.log('Login', email, password)
@@ -44,12 +38,10 @@ const Login = () => {
       .unwrap()
       .then(() => {
         navigate('/profile')
-        // window.location.reload()
       })
       .catch(() => {
         setLoading(false)
       })
-    // dispatch(thunkGetUserName())
   }
 
   return (

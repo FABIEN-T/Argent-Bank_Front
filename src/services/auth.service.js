@@ -22,8 +22,10 @@ export const serviceLogin = (email, password) => {
         //   'serviceLogin data',
         //   JSON.stringify(response.data.body.token)
         // )
-        const typeStorage = false // true: localStorage || false: sessionStorage
-        setTokenStorage(typeStorage, JSON.stringify(response.data.body.token))
+        // const typeStorage = false // true: localStorage || false: sessionStorage
+        // setTokenStorage(typeStorage, JSON.stringify(response.data.body.token))
+        const token = JSON.stringify(response.data.body.token)
+        localStorage.setItem('token', token)
       }
       return response.data
     })
@@ -32,7 +34,8 @@ export const serviceGetUserName = async (dataUserProfile) => {
   // console.log('http://localhost:3001/api/v1/user/profile')
   // const typeStorage = false // true: localStorage || false: sessionStorage
   // const token = getTokenStorage(typeStorage)
-  const token = JSON.parse(sessionStorage.getItem('token'))
+  // const token = JSON.parse(sessionStorage.getItem('token'))
+  const token = JSON.parse(localStorage.getItem('token'))
   console.log('serviceGetUserName token', token)
 
   const headerConfig = {
