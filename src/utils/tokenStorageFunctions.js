@@ -1,4 +1,5 @@
 export function getTokenStorage(typeStorage) {
+  console.log('Storage !', typeStorage)
   typeStorage ? localStorage.getItem('token') : sessionStorage.getItem('token')
 }
 

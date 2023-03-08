@@ -49,7 +49,7 @@ const Login = () => {
       .catch(() => {
         setLoading(false)
       })
-    dispatch(thunkGetUserName())
+    // dispatch(thunkGetUserName())
   }
 
   return (

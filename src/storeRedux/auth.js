@@ -2,7 +2,11 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { useEffect } from 'react'
 // import { setMessage } from './message'
 
-import { serviceLogin, serviceGetUserName } from '../services/auth.service'
+import {
+  serviceLogin,
+  serviceGetUserName,
+  serviceLogout,
+} from '../services/auth.service'
 
 // const user = JSON.parse(localStorage.getItem('user'))
 
@@ -28,6 +32,10 @@ export const thunkLogin = createAsyncThunk(
     }
   }
 )
+
+export const logout = createAsyncThunk('auth/logout', async () => {
+  await serviceLogout()
+})
 
 export const thunkGetUserName = createAsyncThunk(
   'auth/getUserName',
@@ -58,11 +66,9 @@ export const thunkGetUserName = createAsyncThunk(
 
 const initialState = {
   isLoginOk: false,
-  // user: null,
   firstName: '',
   lastName: '',
   maVariable: 'coucou ma variable',
-  // token: null,
 }
 
 const authSlice = createSlice({
@@ -75,7 +81,6 @@ const authSlice = createSlice({
   // },
   extraReducers: {
     [thunkLogin.fulfilled]: (state, action) => {
-      state.isLoggedIn = true
       // state.user = action.payload.user
       // state.token = action.payload.token
       state.isLoginOk = true
@@ -87,14 +92,15 @@ const authSlice = createSlice({
     },
     [thunkGetUserName.fulfilled]: (state, action) => {
       state.maVariable = 'Profile OK !'
-      // state.isLoginOk = true
       state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
     },
-    // [logout.fulfilled]: (state, action) => {
-    //   state.isLoggedIn = false
-    //   state.user = null
-    // },
+    [logout.fulfilled]: (state, action) => {
+      state.isLoginOk = false
+      state.firstName = ''
+      state.lastName = ''
+      state.maVariable = 'LOGOUT !'
+    },
   },
 })
 
