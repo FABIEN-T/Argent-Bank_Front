@@ -43,11 +43,8 @@ export default function Profile() {
 
   useEffect(() => {
     dispatch(thunkGetUserName())
-    // const { dataName } = dispatch(thunkGetUserName())
     console.log('PROFILE STATE', myStore.getState().auth)
-    // console.log('PROFILE useEffect', firstName, lastName)
-    // console.log('PROFILE dataName', dataName)
-  })
+  }, [dispatch, myStore])
   const { firstName, lastName } = useSelector((state) => state.auth)
   console.log('Profile all Name', firstName, lastName)
 

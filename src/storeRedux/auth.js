@@ -1,11 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { useEffect } from 'react'
-// import { setMessage } from './message'
+import { removeTokenStorage } from '../utils/tokenStorageFunctions'
 
 import {
   serviceLogin,
   serviceGetUserName,
-  serviceLogout,
+  // serviceLogout,
 } from '../services/auth.service'
 
 // const user = JSON.parse(localStorage.getItem('user'))
@@ -33,22 +32,11 @@ export const thunkLogin = createAsyncThunk(
   }
 )
 
-export const logout = createAsyncThunk('auth/logout', async () => {
-  await serviceLogout()
-})
-
 export const thunkGetUserName = createAsyncThunk(
   'auth/getUserName',
   async (payloadUserProfile, { rejectWithValue }) => {
     try {
-      console.log('auth/getUserName !!!!!!!!!')
-      // const dataName = await serviceGetUserName(dataUserProfile)
-      // firstName = data.firstName
-      // lastName = data.lastName
-      // console.log('auth/getUserName dataName', data.firstName, data.lastName)
-      // return { firstName, lastName }
-      // console.log('auth/getUserName dataName', dataName)
-      // return dataName
+      // console.log('auth/getUserName !!!!!!!!!')
       return await serviceGetUserName(payloadUserProfile)
     } catch (error) {
       console.log('Catch Error', error)
@@ -64,6 +52,12 @@ export const thunkGetUserName = createAsyncThunk(
   }
 )
 
+// export const thunklogout = createAsyncThunk('auth/logout', async () => {
+//   console.log('serviceLogout !!!!')
+//   await sessionStorage.removeItem('token')
+//   // sessionStorage.removeItem('token')
+// })
+
 const initialState = {
   isLoginOk: false,
   firstName: '',
@@ -74,15 +68,20 @@ const initialState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  // reducers: {
-  //   setTokenAction: (state, action) => {
-  //     state.token = action.payload
-  //   },
-  // },
+  reducers: {
+    // setTokenAction: (state, action) => {
+    //   state.token = action.payload
+    // },
+    // actionLogout: (state) => {
+    //   sessionStorage.removeItem('token')
+    //   state.isLoginOk = false
+    //   state.firstName = ''
+    //   state.lastName = ''
+    //   state.maVariable = 'LOGOUT !'
+    // },
+  },
   extraReducers: {
     [thunkLogin.fulfilled]: (state, action) => {
-      // state.user = action.payload.user
-      // state.token = action.payload.token
       state.isLoginOk = true
       state.maVariable = 'Login Ok !'
     },
@@ -95,15 +94,9 @@ const authSlice = createSlice({
       state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
     },
-    [logout.fulfilled]: (state, action) => {
-      state.isLoginOk = false
-      state.firstName = ''
-      state.lastName = ''
-      state.maVariable = 'LOGOUT !'
-    },
   },
 })
 
-// export const { setTokenAction } = authSlice.actions
+// export const { actionLogout } = authSlice.actions
 const { reducer } = authSlice
 export default reducer

@@ -29,8 +29,7 @@ export const serviceLogin = (email, password) => {
     })
 }
 export const serviceGetUserName = async (dataUserProfile) => {
-  // const dataName = {}
-  console.log('http://localhost:3001/api/v1/user/profile')
+  // console.log('http://localhost:3001/api/v1/user/profile')
   // const typeStorage = false // true: localStorage || false: sessionStorage
   // const token = getTokenStorage(typeStorage)
   const token = JSON.parse(sessionStorage.getItem('token'))
@@ -46,7 +45,7 @@ export const serviceGetUserName = async (dataUserProfile) => {
   return await axios
     .post(API_URL + 'profile', dataUserProfile, headerConfig)
     .then((response) => {
-      console.log('getUserName data', response.data.body)
+      // console.log('getUserName data', response.data.body)
       return response.data.body
     })
     .catch((error) => {
@@ -55,7 +54,7 @@ export const serviceGetUserName = async (dataUserProfile) => {
     })
 }
 
-export const serviceLogout = () => {
-  console.log('serviceLogout !!!!')
-  sessionStorage.removeItem('token')
-}
+// export const serviceLogout = () => {
+//   console.log('serviceLogout !!!!')
+//   sessionStorage.removeItem('token')
+// }
