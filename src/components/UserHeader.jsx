@@ -23,12 +23,7 @@ export default function UserHeader() {
         <Link to="/" className="main-nav-item">
           <i className="fa fa-user-circle"></i> {firstName}{' '}
         </Link>
-        <Link
-          to="/"
-          className="main-nav-item"
-          // onClick={localStorage.clear()}
-          onClick={dispatch(actionLogout())}
-        >
+        <Link to="/" className="main-nav-item" onClick={dispatch(actionLogout)}>
           <i className="fa fa-sign-out"></i> Sign Out
         </Link>
       </div>

@@ -5,13 +5,15 @@ import Features from '../components/Features.jsx'
 import Footer from '../components/Footer.jsx'
 
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useStore } from 'react-redux'
 import { getTokenStorage } from '../utils/tokenStorageFunctions.js'
 import { setTokenAction, thunkGetUserProfile } from '../storeRedux/auth'
 
 import '../main.css'
 
 export default function Home() {
+  const myStore = useStore()
+  console.log('HOME STATE', myStore.getState().auth)
   return (
     <div className="container">
       <Header />

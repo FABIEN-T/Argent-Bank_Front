@@ -17,12 +17,18 @@ const Login = () => {
 
   const [loading, setLoading] = useState(false)
 
-  const { isLoggedIn } = useSelector((state) => state.auth)
-
   const initialValues = {
     email: '',
     password: '',
   }
+
+  // const { isToken } = useSelector((state) => state.auth)
+
+  // useEffect(() => {
+  //   if (!isToken) {
+  //     navigate('/')
+  //   }
+  // }, [isToken, navigate])
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().required('This field is required!'),

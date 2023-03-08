@@ -57,6 +57,7 @@ const initialState = {
   firstName: '',
   lastName: '',
   isToken: false,
+  token: localStorage.getItem('token') || null,
   maVariable: 'coucou ma variable',
 }
 
@@ -64,10 +65,11 @@ const authSlice = createSlice({
   name: 'authSlice',
   initialState,
   reducers: {
-    actionLogout: (state) => {
-      // sessionStorage.removeItem('token')
+    actionLogout: (state, action) => {
+      sessionStorage.removeItem('token')
       console.log('!!!! LOGOUT !!!!')
-      // localStorage.clear()
+      localStorage.clear()
+      state.token = null
       state.isLoginOk = false
       state.firstName = ''
       state.lastName = ''
@@ -79,6 +81,7 @@ const authSlice = createSlice({
     [thunkLogin.fulfilled]: (state, action) => {
       state.isLoginOk = true
       state.isToken = true
+      state.token = localStorage.getItem('token')
       state.maVariable = 'Login Ok !'
     },
     [thunkLogin.rejected]: (state, action) => {
@@ -86,10 +89,11 @@ const authSlice = createSlice({
       // state.user = null
     },
     [thunkGetUserProfile.fulfilled]: (state, action) => {
-      state.maVariable = 'Profile OK !'
       state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
       state.isToken = true
+      state.maVariable = 'Profile OK !'
+      localStorage.removeItem('token')
     },
   },
 })

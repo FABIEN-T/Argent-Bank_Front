@@ -3,6 +3,8 @@ import UserHeader from '../components/UserHeader.jsx'
 import UserWelcome from '../components/UserWelcome.jsx'
 import UserTransaction from '../components/UserTransaction.jsx'
 import Footer from '../components/Footer.jsx'
+
+import { useNavigate, redirect } from 'react-router-dom'
 import { useSelector, useDispatch, useStore } from 'react-redux'
 
 import { thunkGetUserProfile } from '../storeRedux/auth'
@@ -31,10 +33,17 @@ export default function Profile() {
   ]
   const myStore = useStore()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const { isToken, token } = useSelector((state) => state.auth)
 
   useEffect(() => {
-    dispatch(thunkGetUserProfile())
-  }, [dispatch])
+    if (!token) {
+      navigate('/login')
+    } else {
+      dispatch(thunkGetUserProfile())
+    }
+  }, [dispatch, isToken, navigate])
 
   console.log('PROFILE STATE', myStore.getState().auth)
   const { firstName, lastName } = useSelector((state) => state.auth)
