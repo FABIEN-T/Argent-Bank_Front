@@ -1,5 +1,5 @@
-import UserHeader from '../components/UserHeader.jsx'
-// import Header from '../components/Header.jsx'
+// import UserHeader from '../components/UserHeader.jsx'
+import Header from '../components/Header.jsx'
 import UserWelcome from '../components/UserWelcome.jsx'
 import UserTransaction from '../components/UserTransaction.jsx'
 import Footer from '../components/Footer.jsx'
@@ -51,7 +51,7 @@ export default function Profile() {
 
   return (
     <div className="container">
-      <UserHeader />
+      <Header />
       <main className="main bg-dark">
         <UserWelcome firstName={firstName} lastName={lastName} />
         <h2 className="sr-only">Accounts</h2>

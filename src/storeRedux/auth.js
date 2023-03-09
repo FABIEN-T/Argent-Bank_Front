@@ -3,7 +3,8 @@ import { removeTokenStorage } from '../utils/tokenStorageFunctions'
 
 import {
   serviceLogin,
-  serviceGetUserName,
+  serviceGetUserProfile,
+  serviceUpdateUserProfile,
   // serviceLogout,
 } from '../services/auth.service'
 
@@ -33,11 +34,11 @@ export const thunkLogin = createAsyncThunk(
 )
 
 export const thunkGetUserProfile = createAsyncThunk(
-  'auth/getUserName',
+  'auth/getUserProfile',
   async (payloadUserProfile, { rejectWithValue }) => {
     try {
       // console.log('auth/getUserName !!!!!!!!!')
-      return await serviceGetUserName(payloadUserProfile)
+      return await serviceGetUserProfile(payloadUserProfile)
     } catch (error) {
       console.log('Catch Error', error)
       const message =
@@ -46,8 +47,30 @@ export const thunkGetUserProfile = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString()
-      console.log('catch middleware userProfile :', message)
+      console.log('catch middleware getUserProfile :', message)
       return rejectWithValue({ message })
+    }
+  }
+)
+
+export const thunkUpdateUserProfile = createAsyncThunk(
+  'auth/updateUserProfile',
+  async (updateData, thunkApi) => {
+    try {
+      // console.log('1', updateData)
+      const token = thunkApi.getState().auth.token
+      // console.log('auth/updateUserProfile !!!!!!!!!', token)
+      return await serviceUpdateUserProfile(updateData, token)
+    } catch (error) {
+      console.log('Catch Error', error)
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      console.log('catch middleware updateUserProfile :', message)
+      return thunkApi.rejectWithValue({ message })
     }
   }
 )
@@ -77,11 +100,12 @@ const authSlice = createSlice({
       state.maVariable = 'LOGOUT !'
     },
   },
+
   extraReducers: {
     [thunkLogin.fulfilled]: (state, action) => {
       state.isLoginOk = true
       state.isToken = true
-      state.token = localStorage.getItem('token')
+      state.token = JSON.parse(localStorage.getItem('token'))
       state.maVariable = 'Login Ok !'
     },
     [thunkLogin.rejected]: (state, action) => {
@@ -93,7 +117,16 @@ const authSlice = createSlice({
       state.lastName = action.payload.lastName
       state.isToken = true
       state.maVariable = 'Profile OK !'
-      localStorage.removeItem('token')
+      // localStorage.removeItem('token')
+    },
+    [thunkUpdateUserProfile.fulfilled]: (state, action) => {
+      state.token = action.payload.token
+      localStorage.setItem('token', state.token)
+      state.firstName = action.payload.firstName
+      state.lastName = action.payload.lastName
+      state.isToken = true
+      state.maVariable = 'Edit OK !'
+      // localStorage.removeItem('token')
     },
   },
 })

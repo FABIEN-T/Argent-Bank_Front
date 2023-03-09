@@ -1,3 +1,5 @@
+import FormEditName from './FormEditName.jsx'
+
 export default function UserWelcome({ firstName, lastName }) {
   return (
     <div className="header">
@@ -6,7 +8,13 @@ export default function UserWelcome({ firstName, lastName }) {
         <br />
         {firstName} {lastName}!
       </h1>
-      <button className="edit-button">Edit Name</button>
+      <button
+        className="edit-button"
+        // onClick={<FormEditName />}
+      >
+        Edit Name
+      </button>
+      <FormEditName />
     </div>
   )
 }
