@@ -1,4 +1,4 @@
-import { useNavigate, redirect } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch, useStore } from 'react-redux'
 
 import { thunkUpdateUserProfile } from '../storeRedux/auth'

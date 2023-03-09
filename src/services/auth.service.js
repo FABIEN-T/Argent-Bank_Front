@@ -72,11 +72,6 @@ export const serviceUpdateUserProfile = async (updateData, token) => {
     },
   }
 
-  // const upDateData = {
-  //   firstName: firstname,
-  //   lastName: lastName,
-  // }
-
   return await axios
     .put(API_URL + 'profile', updateData, headerConfig)
     .then((response) => {

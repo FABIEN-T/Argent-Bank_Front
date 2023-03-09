@@ -81,23 +81,19 @@ const initialState = {
   lastName: '',
   isToken: false,
   token: localStorage.getItem('token') || null,
-  maVariable: 'coucou ma variable',
 }
 
 const authSlice = createSlice({
-  name: 'authSlice',
+  name: 'authentification',
   initialState,
   reducers: {
-    actionLogout: (state, action) => {
-      sessionStorage.removeItem('token')
-      console.log('!!!! LOGOUT !!!!')
-      localStorage.clear()
+    actionLogout: (state) => {
+      localStorage.removeItem('token')
       state.token = null
       state.isLoginOk = false
       state.firstName = ''
       state.lastName = ''
       state.isToken = false
-      state.maVariable = 'LOGOUT !'
     },
   },
 
@@ -106,7 +102,6 @@ const authSlice = createSlice({
       state.isLoginOk = true
       state.isToken = true
       state.token = JSON.parse(localStorage.getItem('token'))
-      state.maVariable = 'Login Ok !'
     },
     [thunkLogin.rejected]: (state, action) => {
       state.isLoginOk = false
@@ -116,21 +111,32 @@ const authSlice = createSlice({
       state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
       state.isToken = true
-      state.maVariable = 'Profile OK !'
       // localStorage.removeItem('token')
     },
     [thunkUpdateUserProfile.fulfilled]: (state, action) => {
-      state.token = action.payload.token
-      localStorage.setItem('token', state.token)
+      // localStorage.setItem('token', state.token)
       state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
       state.isToken = true
-      state.maVariable = 'Edit OK !'
       // localStorage.removeItem('token')
     },
   },
 })
 
 export const { actionLogout } = authSlice.actions
-const { reducer } = authSlice
-export default reducer
+export default authSlice.reducer
+
+// export const { actionLogout } = authSlice.actions
+// const { reducer } = authSlice
+// export default reducer
+
+// export const { actions, reducer } = authSlice
+// export const { actionLogout } = actions
+// export default reducer
+
+// on extrait les actions et le reducer
+// const { actions, reducer } = themeSlice
+// // on export chaque action individuellement
+// export const { set, toggle } = actions
+// // on export le reducer comme default export
+// export default reducer
