@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Login from './pages/Login'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
+import Toggle from './pages/Toggle'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/toggle" element={<Toggle />} />
           </Routes>
         </div>
       </div>

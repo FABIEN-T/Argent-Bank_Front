@@ -80,6 +80,7 @@ const initialState = {
   firstName: '',
   lastName: '',
   isToken: false,
+  isEdit: false,
   token: localStorage.getItem('token') || null,
 }
 
@@ -94,6 +95,10 @@ const authSlice = createSlice({
       state.firstName = ''
       state.lastName = ''
       state.isToken = false
+    },
+    actionIsEdit: (state) => {
+      // state.isEdit = true
+      state.isEdit = !state.isEdit
     },
   },
 
@@ -123,7 +128,7 @@ const authSlice = createSlice({
   },
 })
 
-export const { actionLogout } = authSlice.actions
+export const { actionIsEdit, actionLogout } = authSlice.actions
 export default authSlice.reducer
 
 // export const { actionLogout } = authSlice.actions

@@ -53,7 +53,7 @@ export default function Profile() {
     <div className="container">
       <Header />
       <main className="main bg-dark">
-        <UserWelcome firstName={firstName} lastName={lastName} />
+        <UserWelcome />
         <h2 className="sr-only">Accounts</h2>
         {datasAccount.map((object) => (
           <UserTransaction
