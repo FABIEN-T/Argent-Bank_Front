@@ -6,6 +6,7 @@ import {
 } from '../utils/tokenStorageFunctions'
 
 const API_URL = 'http://localhost:3001/api/v1/user/'
+const typeStorage = false
 
 export const serviceLogin = async (email, password) => {
   // console.log('url :', API_URL + 'login')
@@ -17,25 +18,26 @@ export const serviceLogin = async (email, password) => {
     .then((response) => {
       // if (response.data.accessToken) {
       if (response.data.body.token) {
+        const token = JSON.stringify(response.data.body.token)
         // console.log('serviceLogin data', response.data.body.token)
         // console.log(
         //   'serviceLogin data',
         //   JSON.stringify(response.data.body.token)
         // )
-        // const typeStorage = false // true: localStorage || false: sessionStorage
-        // setTokenStorage(typeStorage, JSON.stringify(response.data.body.token))
-        const token = JSON.stringify(response.data.body.token)
-        localStorage.setItem('token', token)
+        // const typeStorage = true // true: localStorage || false: sessionStorage
+        setTokenStorage(typeStorage, token)
+
+        // localStorage.setItem('token', token)
       }
       return response.data
     })
 }
 export const serviceGetUserProfile = async (dataUserProfile) => {
   // console.log('http://localhost:3001/api/v1/user/profile')
-  // const typeStorage = false // true: localStorage || false: sessionStorage
-  // const token = getTokenStorage(typeStorage)
+  // const typeStorage = true // true: localStorage || false: sessionStorage
+  const token = JSON.parse(getTokenStorage(typeStorage))
   // const token = JSON.parse(sessionStorage.getItem('token'))
-  const token = JSON.parse(localStorage.getItem('token'))
+  // const token = JSON.parse(localStorage.getItem('token'))
   console.log('serviceGetUserName token', token)
 
   const headerConfig = {
@@ -57,13 +59,13 @@ export const serviceGetUserProfile = async (dataUserProfile) => {
     })
 }
 
-export const serviceUpdateUserProfile = async (updateData, token) => {
-  // const typeStorage = false // true: localStorage || false: sessionStorage
-  // const token = getTokenStorage(typeStorage)
+export const serviceUpdateUserProfile = async (updateData) => {
+  // const typeStorage = true // true: localStorage || false: sessionStorage
+  const token = JSON.parse(getTokenStorage(typeStorage))
   // const token = JSON.parse(sessionStorage.getItem('token'))
   // const esstoken = JSON.parse(token)
   console.log('service updateData token', token)
-  console.log('service updateData', updateData)
+  // console.log('service updateData', updateData)
   const headerConfig = {
     headers: {
       Accept: 'application/json',

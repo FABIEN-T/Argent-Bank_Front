@@ -1,16 +1,16 @@
-export function getTokenStorage(typeStorage) {
-  console.log('Storage !', typeStorage)
-  typeStorage ? localStorage.getItem('token') : sessionStorage.getItem('token')
+export function getTokenStorage(type) {
+  console.log('Storage !', type)
+  return type ? localStorage.getItem('token') : sessionStorage.getItem('token')
 }
 
-export function removeTokenStorage(typeStorage) {
-  typeStorage
+export function removeTokenStorage(type) {
+  return type
     ? localStorage.removeItem('token')
     : sessionStorage.removeItem('token')
 }
 
-export function setTokenStorage(typeStorage, val) {
-  typeStorage
+export function setTokenStorage(type, val) {
+  return type
     ? localStorage.setItem('token', val)
     : sessionStorage.setItem('token', val)
 }

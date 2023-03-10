@@ -1,5 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { removeTokenStorage } from '../utils/tokenStorageFunctions'
+import {
+  getTokenStorage,
+  removeTokenStorage,
+} from '../utils/tokenStorageFunctions'
 
 import {
   serviceLogin,
@@ -55,12 +58,12 @@ export const thunkGetUserProfile = createAsyncThunk(
 
 export const thunkUpdateUserProfile = createAsyncThunk(
   'auth/updateUserProfile',
-  async (updateData, thunkApi) => {
+  async (payloadUpdateData, thunkApi) => {
     try {
       // console.log('1', updateData)
-      const token = thunkApi.getState().auth.token
+      // const token = thunkApi.getState().auth.token
       // console.log('auth/updateUserProfile !!!!!!!!!', token)
-      return await serviceUpdateUserProfile(updateData, token)
+      return await serviceUpdateUserProfile(payloadUpdateData)
     } catch (error) {
       console.log('Catch Error', error)
       const message =
@@ -75,13 +78,17 @@ export const thunkUpdateUserProfile = createAsyncThunk(
   }
 )
 
+// const typeStorage = false
+
 const initialState = {
   isLoginOk: false,
   firstName: '',
   lastName: '',
   isToken: false,
   isEdit: false,
-  token: localStorage.getItem('token') || null,
+  isRememberMe: false,
+  // token: JSON.parse(getTokenStorage(isRememberMe)) || null,
+  token: null,
 }
 
 const authSlice = createSlice({
@@ -89,7 +96,8 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     actionLogout: (state) => {
-      localStorage.removeItem('token')
+      // localStorage.removeItem('token')
+      removeTokenStorage(state.isRememberMe)
       state.token = null
       state.isLoginOk = false
       state.firstName = ''
@@ -106,7 +114,7 @@ const authSlice = createSlice({
     [thunkLogin.fulfilled]: (state, action) => {
       state.isLoginOk = true
       state.isToken = true
-      state.token = JSON.parse(localStorage.getItem('token'))
+      // state.token = JSON.parse(getTokenStorage(state.isRememberMe))
     },
     [thunkLogin.rejected]: (state, action) => {
       state.isLoginOk = false

@@ -38,7 +38,7 @@ export default function Profile() {
   const { isToken, token } = useSelector((state) => state.auth)
 
   useEffect(() => {
-    if (!token) {
+    if (!isToken) {
       navigate('/login')
     } else {
       dispatch(thunkGetUserProfile())
