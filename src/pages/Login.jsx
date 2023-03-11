@@ -4,7 +4,7 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 
-import { thunkLogin, thunkGetUserProfile } from '../storeRedux/auth'
+import { thunkLogin, actionIsRememberMe } from '../storeRedux/auth'
 import { setToken } from '../utils/tokenStorageFunctions'
 
 import UserHeader from '../components/UserHeader.jsx'
@@ -22,18 +22,17 @@ const Login = () => {
     password: '',
   }
 
-  // const { isToken } = useSelector((state) => state.auth)
-
-  // useEffect(() => {
-  //   if (!isToken) {
-  //     navigate('/')
-  //   }
-  // }, [isToken, navigate])
-
   const validationSchema = Yup.object().shape({
     email: Yup.string().required('This field is required!'),
     password: Yup.string().required('This field is required!'),
   })
+
+  const { isRememberMe } = useSelector((state) => state.auth)
+
+  const handleChecked = () => {
+    dispatch(actionIsRememberMe())
+    console.log('The checkbox was toggled', isRememberMe)
+  }
 
   const handleLogin = (formValue) => {
     const { email, password } = formValue
@@ -101,7 +100,11 @@ const Login = () => {
                 />
               </div>
               <div className="input-remember">
-                <input type="checkbox" id="remember-me" />
+                <input
+                  type="checkbox"
+                  id="remember-me"
+                  onChange={handleChecked}
+                />
                 <label htmlFor="remember-me">Remember me</label>
               </div>
 
@@ -112,10 +115,10 @@ const Login = () => {
                   className="sign-in-button"
                   disabled={loading}
                 >
-                  {loading && (
+                  {/* {loading && (
                     // <span className="spinner-border spinner-border-sm"></span>
                     <p>loading...</p>
-                  )}
+                  )} */}
                   <span>Sign In</span>
                 </button>
               </div>

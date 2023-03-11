@@ -7,7 +7,9 @@ export default function FormEditName() {
   const dispatch = useDispatch()
   // const [setLoading] = useState(false)
 
-  const { firstName, lastName } = useSelector((state) => state.auth)
+  const { firstName, lastName, isRememberMe } = useSelector(
+    (state) => state.auth
+  )
 
   const [upFirstName, setUpFirstName] = useState('')
   const [upLastName, setUpLastName] = useState('')
@@ -20,7 +22,7 @@ export default function FormEditName() {
     }
     dispatch(actionIsEdit())
     // console.log('FormEditName', updateData)
-    dispatch(thunkUpdateUserProfile(updateData))
+    dispatch(thunkUpdateUserProfile(updateData, isRememberMe))
   }
 
   return (

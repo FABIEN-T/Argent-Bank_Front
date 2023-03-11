@@ -35,7 +35,7 @@ export default function Profile() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { isToken, token } = useSelector((state) => state.auth)
+  const { isToken, isRememberMe } = useSelector((state) => state.auth)
 
   useEffect(() => {
     if (!isToken) {

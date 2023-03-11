@@ -1,15 +1,14 @@
 import axios from 'axios'
-// import { getTokenLocalStorage } from '../utils/tokenStorageFunctions'
 import {
   setTokenStorage,
   getTokenStorage,
 } from '../utils/tokenStorageFunctions'
 
 const API_URL = 'http://localhost:3001/api/v1/user/'
-const typeStorage = false
+const typeStorage = true
 
-export const serviceLogin = async (email, password) => {
-  // console.log('url :', API_URL + 'login')
+export const serviceLogin = async (email, password, isRememberMe) => {
+  // console.log('serviceLogin isRememberMe', isRememberMe)
   return await axios
     .post(API_URL + 'login', {
       email: email,
@@ -25,7 +24,7 @@ export const serviceLogin = async (email, password) => {
         //   JSON.stringify(response.data.body.token)
         // )
         // const typeStorage = true // true: localStorage || false: sessionStorage
-        setTokenStorage(typeStorage, token)
+        setTokenStorage(isRememberMe, token)
 
         // localStorage.setItem('token', token)
       }
@@ -35,8 +34,10 @@ export const serviceLogin = async (email, password) => {
 export const serviceGetUserProfile = async (dataUserProfile) => {
   // console.log('http://localhost:3001/api/v1/user/profile')
   // const typeStorage = true // true: localStorage || false: sessionStorage
-  const token = JSON.parse(getTokenStorage(typeStorage))
-  // const token = JSON.parse(sessionStorage.getItem('token'))
+  // console.log('serviceGetUserProfile isRememberMe', isRememberMe)
+  // const token = JSON.parse(getTokenStorage(false))
+  // const token = JSON.parse(getTokenStorage(isRememberMe))
+  const token = JSON.parse(sessionStorage.getItem('token'))
   // const token = JSON.parse(localStorage.getItem('token'))
   console.log('serviceGetUserName token', token)
 
@@ -59,9 +60,9 @@ export const serviceGetUserProfile = async (dataUserProfile) => {
     })
 }
 
-export const serviceUpdateUserProfile = async (updateData) => {
+export const serviceUpdateUserProfile = async (updateData, isRememberMe) => {
   // const typeStorage = true // true: localStorage || false: sessionStorage
-  const token = JSON.parse(getTokenStorage(typeStorage))
+  const token = JSON.parse(getTokenStorage(isRememberMe))
   // const token = JSON.parse(sessionStorage.getItem('token'))
   // const esstoken = JSON.parse(token)
   console.log('service updateData token', token)

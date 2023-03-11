@@ -6,7 +6,7 @@ import { actionLogout } from '../storeRedux/auth'
 
 export default function Header() {
   const { firstName, isToken } = useSelector((state) => state.auth)
-  console.log('HEADER isToken', isToken)
+  // console.log('HEADER isToken', isToken)
   const dispatch = useDispatch()
 
   return (

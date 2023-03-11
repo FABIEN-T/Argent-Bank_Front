@@ -19,16 +19,16 @@ export default function UserWelcome() {
   const [upFirstName, setUpFirstName] = useState('')
   const [upLastName, setUpLastName] = useState('')
 
-  const handleUpdate = (e) => {
-    e.preventDefault()
-    const updateData = {
-      firstName: upFirstName ? upFirstName : firstName,
-      lastName: upLastName ? upLastName : lastName,
-    }
-    // console.log('FormEditName', updateData)
-    setIsOpen(false)
-    dispatch(thunkUpdateUserProfile(updateData))
-  }
+  // const handleUpdate = (e) => {
+  //   e.preventDefault()
+  //   const updateData = {
+  //     firstName: upFirstName ? upFirstName : firstName,
+  //     lastName: upLastName ? upLastName : lastName,
+  //   }
+  //   // console.log('FormEditName', updateData)
+  //   setIsOpen(false)
+  //   dispatch(thunkUpdateUserProfile(updateData))
+  // }
 
   // console.log('isEdit', isEdit)
 
