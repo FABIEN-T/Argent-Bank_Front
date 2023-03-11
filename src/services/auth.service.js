@@ -31,13 +31,13 @@ export const serviceLogin = async (email, password, isRememberMe) => {
       return response.data
     })
 }
-export const serviceGetUserProfile = async (dataUserProfile) => {
+export const serviceGetUserProfile = async (dataUserProfile, isRememberMe) => {
   // console.log('http://localhost:3001/api/v1/user/profile')
   // const typeStorage = true // true: localStorage || false: sessionStorage
-  // console.log('serviceGetUserProfile isRememberMe', isRememberMe)
+  console.log('serviceGetUserProfile isRememberMe', isRememberMe)
   // const token = JSON.parse(getTokenStorage(false))
-  // const token = JSON.parse(getTokenStorage(isRememberMe))
-  const token = JSON.parse(sessionStorage.getItem('token'))
+  const token = JSON.parse(getTokenStorage(isRememberMe))
+  // const token = JSON.parse(sessionStorage.getItem('token'))
   // const token = JSON.parse(localStorage.getItem('token'))
   console.log('serviceGetUserName token', token)
 

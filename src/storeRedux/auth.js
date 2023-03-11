@@ -39,9 +39,9 @@ export const thunkLogin = createAsyncThunk(
 
 export const thunkGetUserProfile = createAsyncThunk(
   'auth/getUserProfile',
-  async ({ payloadUserProfile }, { getState, rejectWithValue }) => {
+  async (payloadUserProfile, { getState, rejectWithValue }) => {
     try {
-      // console.log('auth/getUserName !!!!!!!!!')
+      console.log('auth/getUserName !!!!!!!!!')
       const isRememberMe = getState().auth.isRememberMe
       console.log('auth/getUserProfile isRememberMe', isRememberMe)
       return await serviceGetUserProfile(payloadUserProfile, isRememberMe)
@@ -61,7 +61,7 @@ export const thunkGetUserProfile = createAsyncThunk(
 
 export const thunkUpdateUserProfile = createAsyncThunk(
   'auth/updateUserProfile',
-  async ({ payloadUpdateData }, { getState, thunkApi }) => {
+  async (payloadUpdateData, { getState, rejectWithValue }) => {
     try {
       // console.log('1', updateData)
       // const token = thunkApi.getState().auth.token
@@ -77,7 +77,7 @@ export const thunkUpdateUserProfile = createAsyncThunk(
         error.message ||
         error.toString()
       console.log('catch middleware updateUserProfile :', message)
-      return thunkApi.rejectWithValue({ message })
+      return rejectWithValue({ message })
     }
   }
 )
