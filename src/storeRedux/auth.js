@@ -85,14 +85,15 @@ export const thunkUpdateUserProfile = createAsyncThunk(
 // const typeStorage = false
 
 const initialState = {
-  // isLoginOk: false,
   firstName: '',
   lastName: '',
   isToken: false,
   isEdit: false,
   isRememberMe: false,
-  // token: JSON.parse(getTokenStorage(isRememberMe)) || null,
-  token: null,
+  token: JSON.parse(getTokenStorage(true))
+    ? JSON.parse(getTokenStorage(true))
+    : null,
+  // token: null,
 }
 
 const authSlice = createSlice({
@@ -100,13 +101,13 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     actionLogout: (state) => {
-      // localStorage.removeItem('token')
       removeTokenStorage(state.isRememberMe)
       state.token = null
-      // state.isLoginOk = false
       state.firstName = ''
       state.lastName = ''
       state.isToken = false
+      state.isEdit = false
+      state.isRememberMe = false
     },
     actionIsEdit: (state) => {
       // state.isEdit = true

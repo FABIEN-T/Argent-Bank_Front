@@ -20,15 +20,21 @@ export default function Header() {
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
       {isToken ? (
-        <div>
-          <Link to="/" className="main-nav-item">
+        <div className="headerLink">
+          <div className="circleName">
+            <i className="fa fa-user-circle"></i>
+            <div className="faFirstName">{firstName} </div>
+          </div>
+
+          {/* <Link to="/profile" className="main-nav-item">
             <i className="fa fa-user-circle"></i> {firstName}{' '}
-          </Link>
+          </Link> */}
           <Link
             to="/"
             className="main-nav-item"
             onClick={() => dispatch(actionLogout())}
           >
+            {/* <i className="fa fa-user-circle"></i> {firstName}{' '} */}
             <i className="fa fa-sign-out"></i> Sign Out
           </Link>
         </div>
