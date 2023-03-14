@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector, useStore } from 'react-redux'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
@@ -7,7 +7,6 @@ import * as Yup from 'yup'
 import { thunkLogin, actionIsRememberMe } from '../storeRedux/auth'
 import { setToken } from '../utils/tokenStorageFunctions'
 
-import UserHeader from '../components/UserHeader.jsx'
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 

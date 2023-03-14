@@ -4,11 +4,13 @@ import UserWelcome from '../components/UserWelcome.jsx'
 import UserTransaction from '../components/UserTransaction.jsx'
 import Footer from '../components/Footer.jsx'
 
-import { useNavigate, redirect } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch, useStore } from 'react-redux'
 
 import { thunkGetUserProfile } from '../storeRedux/auth'
 import { useEffect } from 'react'
+
+import { isGetTokenStorage } from '../utils/tokenStorageFunctions'
 
 export default function Profile() {
   const datasAccount = [
@@ -35,7 +37,9 @@ export default function Profile() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { isToken, isRememberMe } = useSelector((state) => state.auth)
+  // const { isRememberMe } = useSelector((state) => state.auth)
+
+  const isToken = isGetTokenStorage()
 
   useEffect(() => {
     if (!isToken) {

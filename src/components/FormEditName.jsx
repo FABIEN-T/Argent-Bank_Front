@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 
 import { thunkUpdateUserProfile, actionIsEdit } from '../storeRedux/auth'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import '../main.css'
 
@@ -30,7 +30,7 @@ export default function FormEditName() {
   return (
     <>
       <form>
-        <div class="inputName-wrapper">
+        <div className="inputName-wrapper">
           <input
             value={upFirstName}
             placeholder={firstName}
@@ -48,7 +48,7 @@ export default function FormEditName() {
           />
         </div>
       </form>
-      <div class="inputName-wrapper">
+      <div className="inputName-wrapper">
         <button className="edit-button" onClick={handleUpdate}>
           Save
         </button>

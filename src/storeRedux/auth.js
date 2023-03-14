@@ -8,10 +8,12 @@ import {
   serviceLogin,
   serviceGetUserProfile,
   serviceUpdateUserProfile,
-  // serviceLogout,
 } from '../services/auth.service'
 
-// const user = JSON.parse(localStorage.getItem('user'))
+import { saveState, loadState } from '../utils/saveLoadState'
+
+const persistedState = loadState()
+// console.log('persistedState', persistedState.state.auth)
 
 export const thunkLogin = createAsyncThunk(
   'auth/login',
@@ -20,7 +22,6 @@ export const thunkLogin = createAsyncThunk(
       const isRememberMe = getState().auth.isRememberMe
       const data = await serviceLogin(email, password, isRememberMe)
       console.log('auth/login data', data)
-      // return { user: data }
       return { data }
     } catch (error) {
       console.log('Catch Error', error)
@@ -82,19 +83,19 @@ export const thunkUpdateUserProfile = createAsyncThunk(
   }
 )
 
-// const typeStorage = false
-
-const initialState = {
+const initialStateMemory = {
   firstName: '',
   lastName: '',
-  isToken: false,
   isEdit: false,
   isRememberMe: false,
   token: JSON.parse(getTokenStorage(true))
     ? JSON.parse(getTokenStorage(true))
     : null,
-  // token: null,
 }
+
+const initialState = persistedState
+  ? persistedState.state.auth
+  : initialStateMemory
 
 const authSlice = createSlice({
   name: 'authentification',
@@ -102,10 +103,10 @@ const authSlice = createSlice({
   reducers: {
     actionLogout: (state) => {
       removeTokenStorage(state.isRememberMe)
-      state.token = null
+      // state.token = null
       state.firstName = ''
       state.lastName = ''
-      state.isToken = false
+      // state.isToken = false
       state.isEdit = false
       state.isRememberMe = false
     },
@@ -121,25 +122,28 @@ const authSlice = createSlice({
 
   extraReducers: {
     [thunkLogin.fulfilled]: (state, action) => {
-      // state.isLoginOk = true
-      state.isToken = true
-      // state.token = JSON.parse(getTokenStorage(state.isRememberMe))
+      // state.isToken = true
     },
     [thunkLogin.rejected]: (state, action) => {
-      // state.isLoginOk = false
-      // state.user = null
+      // state.isToken = false
     },
     [thunkGetUserProfile.fulfilled]: (state, action) => {
       state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
-      state.isToken = true
-      // localStorage.removeItem('token')
+      // state.isToken = true
+    },
+    [thunkGetUserProfile.rejected]: (state) => {
+      // state.isToken = false
     },
     [thunkUpdateUserProfile.fulfilled]: (state, action) => {
-      // localStorage.setItem('token', state.token)
       state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
       state.isToken = true
+    },
+    [thunkUpdateUserProfile.rejected]: (state) => {
+      // state.firstName = state.firstName
+      // state.lastName = state.lastName
+      state.isEdit = false
     },
   },
 })
@@ -147,18 +151,3 @@ const authSlice = createSlice({
 export const { actionIsRememberMe, actionIsEdit, actionLogout } =
   authSlice.actions
 export default authSlice.reducer
-
-// export const { actionLogout } = authSlice.actions
-// const { reducer } = authSlice
-// export default reducer
-
-// export const { actions, reducer } = authSlice
-// export const { actionLogout } = actions
-// export default reducer
-
-// on extrait les actions et le reducer
-// const { actions, reducer } = themeSlice
-// // on export chaque action individuellement
-// export const { set, toggle } = actions
-// // on export le reducer comme default export
-// export default reducer

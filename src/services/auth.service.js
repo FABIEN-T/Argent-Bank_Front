@@ -5,7 +5,6 @@ import {
 } from '../utils/tokenStorageFunctions'
 
 const API_URL = 'http://localhost:3001/api/v1/user/'
-const typeStorage = true
 
 export const serviceLogin = async (email, password, isRememberMe) => {
   // console.log('serviceLogin isRememberMe', isRememberMe)

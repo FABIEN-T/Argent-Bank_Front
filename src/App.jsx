@@ -9,17 +9,13 @@ import Toggle from './pages/Toggle'
 function App() {
   return (
     <Router>
-      <div>
-        <div>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/toggle" element={<Toggle />} />
-          </Routes>
-        </div>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/toggle" element={<Toggle />} />
+      </Routes>
     </Router>
   )
 }

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { useEffect } from 'react'
 import { useSelector, useDispatch, useStore } from 'react-redux'
 import { actionLogout } from '../storeRedux/auth'
 

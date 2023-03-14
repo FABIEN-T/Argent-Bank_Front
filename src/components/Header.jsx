@@ -1,13 +1,17 @@
 import { Link } from 'react-router-dom'
 import '../main.css'
 import LogoArgentBank from '../img/argentBankLogo.png'
-import { useSelector, useDispatch, useStore } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { actionLogout } from '../storeRedux/auth'
 
+import { isGetTokenStorage } from '../utils/tokenStorageFunctions'
+
 export default function Header() {
-  const { firstName, isToken } = useSelector((state) => state.auth)
-  // console.log('HEADER isToken', isToken)
+  const { firstName } = useSelector((state) => state.auth)
+
   const dispatch = useDispatch()
+  const isToken = isGetTokenStorage()
+  console.log('HEADER isToken, isToken')
 
   return (
     <nav className="main-nav">
@@ -21,16 +25,16 @@ export default function Header() {
       </Link>
       {isToken ? (
         <div className="headerLink">
-          <div className="circleName">
+          {/* <div className="circleName">
             <i className="fa fa-user-circle"></i>
             <div className="faFirstName">{firstName} </div>
-          </div>
+          </div> */}
 
-          {/* <Link to="/profile" className="main-nav-item">
+          <Link to="/profile" className="main-nav-item">
             <i className="fa fa-user-circle"></i> {firstName}{' '}
-          </Link> */}
+          </Link>
           <Link
-            to="/"
+            to="/home"
             className="main-nav-item"
             onClick={() => dispatch(actionLogout())}
           >

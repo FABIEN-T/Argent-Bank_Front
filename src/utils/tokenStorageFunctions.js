@@ -14,3 +14,11 @@ export function setTokenStorage(type, val) {
     ? localStorage.setItem('token', val)
     : sessionStorage.setItem('token', val)
 }
+
+export function isGetTokenStorage() {
+  if (localStorage.getItem('token') || sessionStorage.getItem('token')) {
+    return true
+  } else {
+    return false
+  }
+}

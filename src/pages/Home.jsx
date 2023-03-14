@@ -4,7 +4,6 @@ import Banner from '../components/Banner.jsx'
 import Features from '../components/Features.jsx'
 import Footer from '../components/Footer.jsx'
 
-import { useEffect } from 'react'
 import { useDispatch, useStore } from 'react-redux'
 import { getTokenStorage } from '../utils/tokenStorageFunctions.js'
 

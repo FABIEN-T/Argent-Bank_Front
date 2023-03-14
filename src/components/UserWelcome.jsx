@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useSelector, useDispatch, useStore } from 'react-redux'
 
 import FormEditName from './FormEditName.jsx'
