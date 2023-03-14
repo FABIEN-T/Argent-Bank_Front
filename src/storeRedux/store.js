@@ -1,20 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from './auth'
 
-import { saveState } from '../utils/saveLoadState'
+import { saveState } from '../utils/stateStorageFunctions'
 // import throttle from 'lodash.throttle'
-
-// const persistedState = loadState()
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
   },
   devTools: true,
-  // persistedState,
 })
 
 store.subscribe(() => {
+  console.log('SUBSCRIBE !!!!')
   saveState({
     state: store.getState(),
   })

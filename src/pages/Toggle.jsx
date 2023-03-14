@@ -2,10 +2,7 @@ import { useState } from 'react'
 import { useSelector, useDispatch, useStore } from 'react-redux'
 
 import { actionIsEdit } from '../storeRedux/auth.js'
-import {
-  setTokenStorage,
-  getTokenStorage,
-} from '../utils/tokenStorageFunctions'
+import { getTokenStorage } from '../utils/tokenStorageFunctions'
 
 export default function Toggle() {
   const dispatch = useDispatch()
@@ -13,7 +10,6 @@ export default function Toggle() {
   console.log('Toggle STATE', myStore.getState().auth.isEdit)
   const isEdit = useSelector((state) => state.auth.isEdit)
   let etat = false
-  let truc = null
 
   // console.log('isEdit', isEdit)
   const callDispatch = (e) => {

@@ -54,7 +54,8 @@ export default function Profile() {
   // console.log('Profile all Name', firstName, lastName)
 
   return (
-    <div className="container">
+    // <div className="container">
+    <>
       <Header />
       <main className="main bg-dark">
         <UserWelcome />
@@ -70,6 +71,7 @@ export default function Profile() {
         ))}
       </main>
       <Footer />
-    </div>
+    </>
+    // </div>
   )
 }

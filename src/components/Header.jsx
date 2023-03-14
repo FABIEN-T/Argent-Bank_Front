@@ -11,7 +11,7 @@ export default function Header() {
 
   const dispatch = useDispatch()
   const isToken = isGetTokenStorage()
-  console.log('HEADER isToken, isToken')
+  // console.log('HEADER isToken, isToken')
 
   return (
     <nav className="main-nav">
@@ -36,9 +36,11 @@ export default function Header() {
           <Link
             to="/home"
             className="main-nav-item"
-            onClick={() => dispatch(actionLogout())}
+            onClick={() => {
+              dispatch(actionLogout())
+              localStorage.removeItem('state')
+            }}
           >
-            {/* <i className="fa fa-user-circle"></i> {firstName}{' '} */}
             <i className="fa fa-sign-out"></i> Sign Out
           </Link>
         </div>

@@ -1,11 +1,9 @@
 import Header from '../components/Header.jsx'
-import UserHeader from '../components/UserHeader.jsx'
 import Banner from '../components/Banner.jsx'
 import Features from '../components/Features.jsx'
 import Footer from '../components/Footer.jsx'
 
-import { useDispatch, useStore } from 'react-redux'
-import { getTokenStorage } from '../utils/tokenStorageFunctions.js'
+import { useStore } from 'react-redux'
 
 import '../main.css'
 

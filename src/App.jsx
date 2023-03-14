@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
 import Toggle from './pages/Toggle'
+import Error from './pages/Error'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/toggle" element={<Toggle />} />
+        <Route path="*" element={<Error />} />
       </Routes>
     </Router>
   )

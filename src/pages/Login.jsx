@@ -49,7 +49,8 @@ const Login = () => {
   }
 
   return (
-    <div className="container">
+    // <div className="container">
+    <>
       <Header />
       <main className="main bg-dark">
         <section className="sign-in-content">
@@ -135,7 +136,8 @@ const Login = () => {
         </section>
       </main>
       <Footer />
-    </div>
+    </>
+    // </div>
   )
 }
 

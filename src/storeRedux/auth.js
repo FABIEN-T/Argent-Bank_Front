@@ -9,11 +9,9 @@ import {
   serviceGetUserProfile,
   serviceUpdateUserProfile,
 } from '../services/auth.service'
-
-import { saveState, loadState } from '../utils/saveLoadState'
+import { loadState } from '../utils/stateStorageFunctions'
 
 const persistedState = loadState()
-// console.log('persistedState', persistedState.state.auth)
 
 export const thunkLogin = createAsyncThunk(
   'auth/login',
@@ -21,7 +19,7 @@ export const thunkLogin = createAsyncThunk(
     try {
       const isRememberMe = getState().auth.isRememberMe
       const data = await serviceLogin(email, password, isRememberMe)
-      console.log('auth/login data', data)
+      // console.log('auth/login data', data)
       return { data }
     } catch (error) {
       console.log('Catch Error', error)
@@ -42,9 +40,9 @@ export const thunkGetUserProfile = createAsyncThunk(
   'auth/getUserProfile',
   async (payloadUserProfile, { getState, rejectWithValue }) => {
     try {
-      console.log('auth/getUserName !!!!!!!!!')
+      // console.log('auth/getUserName !!!!!!!!!')
       const isRememberMe = getState().auth.isRememberMe
-      console.log('auth/getUserProfile isRememberMe', isRememberMe)
+      // console.log('auth/getUserProfile isRememberMe', isRememberMe)
       return await serviceGetUserProfile(payloadUserProfile, isRememberMe)
     } catch (error) {
       console.log('Catch Error', error)
@@ -67,7 +65,7 @@ export const thunkUpdateUserProfile = createAsyncThunk(
       // console.log('1', updateData)
       // const token = thunkApi.getState().auth.token
       const isRememberMe = getState().auth.isRememberMe
-      console.log('auth/updateUserProfile', isRememberMe)
+      // console.log('auth/updateUserProfile', isRememberMe)
       return await serviceUpdateUserProfile(payloadUpdateData, isRememberMe)
     } catch (error) {
       console.log('Catch Error', error)
@@ -109,6 +107,7 @@ const authSlice = createSlice({
       // state.isToken = false
       state.isEdit = false
       state.isRememberMe = false
+      // localStorage.removeItem('state')
     },
     actionIsEdit: (state) => {
       // state.isEdit = true
@@ -116,7 +115,10 @@ const authSlice = createSlice({
     },
     actionIsRememberMe: (state) => {
       state.isRememberMe = !state.isRememberMe
-      console.log('auth', state.isRememberMe)
+      if (state.isRememberMe === false) {
+        localStorage.removeItem('state')
+      }
+      // console.log('auth', state.isRememberMe)
     },
   },
 
