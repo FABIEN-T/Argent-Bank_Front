@@ -17,27 +17,19 @@ export const serviceLogin = async (email, password, isRememberMe) => {
       // if (response.data.accessToken) {
       if (response.data.body.token) {
         const token = JSON.stringify(response.data.body.token)
-        // console.log('serviceLogin data', response.data.body.token)
-        // console.log(
-        //   'serviceLogin data',
-        //   JSON.stringify(response.data.body.token)
-        // )
-        // const typeStorage = true // true: localStorage || false: sessionStorage
         setTokenStorage(isRememberMe, token)
-
-        // localStorage.setItem('token', token)
       }
       return response.data
     })
 }
 export const serviceGetUserProfile = async (dataUserProfile, isRememberMe) => {
-  // console.log('http://localhost:3001/api/v1/user/profile')
-  // const typeStorage = true // true: localStorage || false: sessionStorage
-  // console.log('serviceGetUserProfile isRememberMe', isRememberMe)
+  // if (isRememberMe === false) {
+  //   console.log('gestUser remember', isRememberMe)
+  //   localStorage.removeItem('state')
+  //   localStorage.clear()
+
   // const token = JSON.parse(getTokenStorage(false))
   const token = JSON.parse(getTokenStorage(isRememberMe))
-  // const token = JSON.parse(sessionStorage.getItem('token'))
-  // const token = JSON.parse(localStorage.getItem('token'))
   // console.log('serviceGetUserName token', token)
 
   const headerConfig = {

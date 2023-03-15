@@ -39,15 +39,17 @@ export default function Profile() {
 
   // const { isRememberMe } = useSelector((state) => state.auth)
 
-  const isToken = isGetTokenStorage()
+  // const isToken = isGetTokenStorage()
 
-  useEffect(() => {
-    if (!isToken) {
-      navigate('/login')
-    } else {
-      dispatch(thunkGetUserProfile())
-    }
-  }, [dispatch, isToken, navigate])
+  // useEffect(() => {
+  //   if (!isToken) {
+  //     navigate('/login')
+  //   } else {
+  //     dispatch(thunkGetUserProfile())
+  //   }
+  // }, [dispatch, isToken, navigate])
+
+  dispatch(thunkGetUserProfile())
 
   console.log('PROFILE STATE', myStore.getState().auth)
   const { firstName, lastName } = useSelector((state) => state.auth)

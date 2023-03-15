@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import {
   getTokenStorage,
   removeTokenStorage,
+  isGetTokenStorage,
 } from '../utils/tokenStorageFunctions'
 
 import {
@@ -86,9 +87,10 @@ const initialStateMemory = {
   lastName: '',
   isEdit: false,
   isRememberMe: false,
-  token: JSON.parse(getTokenStorage(true))
-    ? JSON.parse(getTokenStorage(true))
-    : null,
+  isToken: false,
+  // token: JSON.parse(getTokenStorage(true))
+  //   ? JSON.parse(getTokenStorage(true))
+  //   : null,
 }
 
 const initialState = persistedState
@@ -101,22 +103,20 @@ const authSlice = createSlice({
   reducers: {
     actionLogout: (state) => {
       removeTokenStorage(state.isRememberMe)
-      // state.token = null
       state.firstName = ''
       state.lastName = ''
-      // state.isToken = false
       state.isEdit = false
       state.isRememberMe = false
-      // localStorage.removeItem('state')
     },
     actionIsEdit: (state) => {
-      // state.isEdit = true
       state.isEdit = !state.isEdit
     },
     actionIsRememberMe: (state) => {
       state.isRememberMe = !state.isRememberMe
+      console.log('ACTIONisRememberMe', state.isRememberMe)
       if (state.isRememberMe === false) {
         localStorage.removeItem('state')
+        // localStorage.clear
       }
       // console.log('auth', state.isRememberMe)
     },
@@ -124,10 +124,10 @@ const authSlice = createSlice({
 
   extraReducers: {
     [thunkLogin.fulfilled]: (state, action) => {
-      // state.isToken = true
+      state.isToken = isGetTokenStorage()
     },
     [thunkLogin.rejected]: (state, action) => {
-      // state.isToken = false
+      state.isToken = false
     },
     [thunkGetUserProfile.fulfilled]: (state, action) => {
       state.firstName = action.payload.firstName
@@ -140,7 +140,7 @@ const authSlice = createSlice({
     [thunkUpdateUserProfile.fulfilled]: (state, action) => {
       state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
-      state.isToken = true
+      // state.isToken = true
     },
     [thunkUpdateUserProfile.rejected]: (state) => {
       // state.firstName = state.firstName

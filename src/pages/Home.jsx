@@ -4,7 +4,6 @@ import Features from '../components/Features.jsx'
 import Footer from '../components/Footer.jsx'
 
 import { useStore } from 'react-redux'
-
 import '../main.css'
 
 export default function Home() {
