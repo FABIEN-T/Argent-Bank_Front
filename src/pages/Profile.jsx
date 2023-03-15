@@ -1,16 +1,16 @@
-// import UserHeader from '../components/UserHeader.jsx'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch, useStore } from 'react-redux'
+
 import Header from '../components/Header.jsx'
 import UserWelcome from '../components/UserWelcome.jsx'
 import UserTransaction from '../components/UserTransaction.jsx'
 import Footer from '../components/Footer.jsx'
 
-import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch, useStore } from 'react-redux'
-
 import { thunkGetUserProfile } from '../storeRedux/auth'
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 
-import { isGetTokenStorage } from '../utils/tokenStorageFunctions'
+// import { isGetTokenStorage } from '../utils/tokenStorageFunctions'
 
 export default function Profile() {
   const datasAccount = [
@@ -52,7 +52,7 @@ export default function Profile() {
   dispatch(thunkGetUserProfile())
 
   console.log('PROFILE STATE', myStore.getState().auth)
-  const { firstName, lastName } = useSelector((state) => state.auth)
+  // const { firstName, lastName } = useSelector((state) => state.auth)
   // console.log('Profile all Name', firstName, lastName)
 
   return (

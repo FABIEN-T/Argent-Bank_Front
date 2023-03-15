@@ -9,7 +9,7 @@ import { actionIsEdit, thunkUpdateUserProfile } from '../storeRedux/auth.js'
 export default function UserWelcome() {
   const dispatch = useDispatch()
   const myStore = useStore()
-  console.log('UserWelcome STATE', myStore.getState().auth)
+  // console.log('UserWelcome STATE', myStore.getState().auth)
   const { isEdit, firstName, lastName, isToken } = useSelector(
     (state) => state.auth
   )

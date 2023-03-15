@@ -30,7 +30,7 @@ const Login = () => {
 
   const handleChecked = () => {
     dispatch(actionIsRememberMe())
-    console.log('The checkbox was toggled', isRememberMe)
+    // console.log('The checkbox was toggled', isRememberMe)
   }
 
   const handleLogin = (formValue) => {

@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import '../main.css'
 import LogoArgentBank from '../img/argentBankLogo.png'
@@ -8,7 +9,6 @@ import { isGetTokenStorage } from '../utils/tokenStorageFunctions'
 
 export default function Header() {
   const { firstName } = useSelector((state) => state.auth)
-
   const dispatch = useDispatch()
   const isToken = isGetTokenStorage()
   // console.log('HEADER isToken, isToken')

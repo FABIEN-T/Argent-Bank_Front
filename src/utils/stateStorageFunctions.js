@@ -1,3 +1,5 @@
+// import store from '../storeRedux/store'
+
 export const loadState = () => {
   try {
     const serializedState = localStorage.getItem('state')

@@ -25,6 +25,7 @@ export default function FormEditName() {
     dispatch(actionIsEdit())
     // console.log('FormEditName', updateData)
     dispatch(thunkUpdateUserProfile(updateData, isRememberMe))
+    localStorage.removeItem('state')
   }
 
   return (

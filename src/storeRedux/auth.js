@@ -132,7 +132,6 @@ const authSlice = createSlice({
     [thunkGetUserProfile.fulfilled]: (state, action) => {
       state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
-      // state.isToken = true
     },
     [thunkGetUserProfile.rejected]: (state) => {
       // state.isToken = false
