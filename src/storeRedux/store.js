@@ -14,9 +14,8 @@ const store = configureStore({
 let myStore = {}
 
 store.subscribe(() => {
-  // console.log('SUBSCRIBE !!!!')
   myStore = store.getState()
-  console.log('STORE', myStore.auth.isRememberMe)
+  console.log('STORE subscribe', myStore.auth.isRememberMe)
   if (myStore.auth.isRememberMe === true) {
     saveState({
       state: store.getState(),

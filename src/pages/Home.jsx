@@ -10,13 +10,13 @@ export default function Home() {
   const myStore = useStore()
   // console.log('HOME STATE', myStore.getState().auth)
   return (
-    <div className="container">
+    <>
       <Header />
       <main>
         <Banner />
         <Features />
       </main>
       <Footer />
-    </div>
+    </>
   )
 }

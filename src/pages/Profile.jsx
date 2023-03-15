@@ -1,6 +1,4 @@
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch, useStore } from 'react-redux'
+import { useDispatch, useStore } from 'react-redux'
 
 import Header from '../components/Header.jsx'
 import UserWelcome from '../components/UserWelcome.jsx'
@@ -8,9 +6,6 @@ import UserTransaction from '../components/UserTransaction.jsx'
 import Footer from '../components/Footer.jsx'
 
 import { thunkGetUserProfile } from '../storeRedux/auth'
-// import { useEffect } from 'react'
-
-// import { isGetTokenStorage } from '../utils/tokenStorageFunctions'
 
 export default function Profile() {
   const datasAccount = [
@@ -33,30 +28,14 @@ export default function Profile() {
       transactionBtn: 'View transactions',
     },
   ]
-  const myStore = useStore()
+  // const myStore = useStore()
   const dispatch = useDispatch()
-  const navigate = useNavigate()
-
-  // const { isRememberMe } = useSelector((state) => state.auth)
-
-  // const isToken = isGetTokenStorage()
-
-  // useEffect(() => {
-  //   if (!isToken) {
-  //     navigate('/login')
-  //   } else {
-  //     dispatch(thunkGetUserProfile())
-  //   }
-  // }, [dispatch, isToken, navigate])
 
   dispatch(thunkGetUserProfile())
 
-  console.log('PROFILE STATE', myStore.getState().auth)
-  // const { firstName, lastName } = useSelector((state) => state.auth)
-  // console.log('Profile all Name', firstName, lastName)
+  // console.log('PROFILE STATE', myStore.getState().auth)
 
   return (
-    // <div className="container">
     <>
       <Header />
       <main className="main bg-dark">
@@ -74,6 +53,5 @@ export default function Profile() {
       </main>
       <Footer />
     </>
-    // </div>
   )
 }

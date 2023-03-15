@@ -88,9 +88,6 @@ const initialStateMemory = {
   isEdit: false,
   isRememberMe: false,
   isToken: false,
-  // token: JSON.parse(getTokenStorage(true))
-  //   ? JSON.parse(getTokenStorage(true))
-  //   : null,
 }
 
 const initialState = persistedState
@@ -114,11 +111,9 @@ const authSlice = createSlice({
     actionIsRememberMe: (state) => {
       state.isRememberMe = !state.isRememberMe
       console.log('ACTIONisRememberMe', state.isRememberMe)
-      if (state.isRememberMe === false) {
-        localStorage.removeItem('state')
-        // localStorage.clear
-      }
-      // console.log('auth', state.isRememberMe)
+      // if (state.isRememberMe === false) {
+      //   localStorage.removeItem('state')
+      // }
     },
   },
 
