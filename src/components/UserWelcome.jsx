@@ -1,7 +1,7 @@
-import { useSelector, useDispatch, useStore } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import FormEditName from './FormEditName.jsx'
-import { actionIsEdit, thunkUpdateUserProfile } from '../storeRedux/auth.js'
+import { actionIsEdit } from '../storeRedux/auth.js'
 
 export default function UserWelcome() {
   const dispatch = useDispatch()

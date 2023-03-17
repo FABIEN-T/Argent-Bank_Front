@@ -1,4 +1,4 @@
-import { useDispatch, useStore } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import Header from '../components/Header.jsx'
 import UserWelcome from '../components/UserWelcome.jsx'
@@ -31,6 +31,9 @@ export default function Profile() {
   // const myStore = useStore()
   const dispatch = useDispatch()
 
+  // const { isLogin } = useSelector((state) => state.auth)
+
+  // console.log('PROFILE isLogin', isLogin)
   dispatch(thunkGetUserProfile())
 
   // console.log('PROFILE STATE', myStore.getState().auth)

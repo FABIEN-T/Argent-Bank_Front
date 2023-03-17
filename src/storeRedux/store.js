@@ -11,16 +11,14 @@ const store = configureStore({
   devTools: true,
 })
 
+export default store
 let myStore = {}
 
 store.subscribe(() => {
   myStore = store.getState()
   console.log('STORE subscribe', myStore.auth.isRememberMe)
-  if (myStore.auth.isRememberMe === true) {
-    saveState({
-      state: store.getState(),
-    })
-  }
+  const type = myStore.auth.isRememberMe
+  saveState(type, {
+    state: store.getState(),
+  })
 })
-
-export default store

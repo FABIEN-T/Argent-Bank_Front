@@ -1,7 +1,8 @@
+import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { thunkUpdateUserProfile, actionIsEdit } from '../storeRedux/auth'
-import { useState } from 'react'
+import { removeState } from '../utils/stateStorageFunctions'
 
 import '../main.css'
 
@@ -25,7 +26,7 @@ export default function FormEditName() {
     dispatch(actionIsEdit())
     // console.log('FormEditName', updateData)
     dispatch(thunkUpdateUserProfile(updateData, isRememberMe))
-    localStorage.removeItem('state')
+    removeState(isRememberMe)
   }
 
   return (

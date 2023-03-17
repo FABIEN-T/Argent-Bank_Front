@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import '../main.css'
 import LogoArgentBank from '../img/argentBankLogo.png'
@@ -6,12 +5,16 @@ import { useSelector, useDispatch } from 'react-redux'
 import { actionLogout } from '../storeRedux/auth'
 
 import { isGetTokenStorage } from '../utils/tokenStorageFunctions'
+import { removeState } from '../utils/stateStorageFunctions'
 
 export default function Header() {
-  const { firstName } = useSelector((state) => state.auth)
+  const { firstName, isLogin, isRememberMe } = useSelector(
+    (state) => state.auth
+  )
   const dispatch = useDispatch()
   const isToken = isGetTokenStorage()
-  // console.log('HEADER isToken, isToken')
+
+  console.log('HEADER isLogin', isLogin)
 
   return (
     <nav className="main-nav">
@@ -23,7 +26,7 @@ export default function Header() {
         />
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
-      {isToken ? (
+      {isToken && isLogin === false ? (
         <div className="headerLink">
           {/* <div className="circleName">
             <i className="fa fa-user-circle"></i>
@@ -38,7 +41,7 @@ export default function Header() {
             className="main-nav-item"
             onClick={() => {
               dispatch(actionLogout())
-              localStorage.removeItem('state')
+              removeState(isRememberMe)
             }}
           >
             <i className="fa fa-sign-out"></i> Sign Out

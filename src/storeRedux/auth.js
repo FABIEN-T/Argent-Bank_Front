@@ -10,9 +10,10 @@ import {
   serviceGetUserProfile,
   serviceUpdateUserProfile,
 } from '../services/auth.service'
-import { loadState } from '../utils/stateStorageFunctions'
-
-const persistedState = loadState()
+import {
+  loadStateLocalStorage,
+  loadStateSessionStorage,
+} from '../utils/stateStorageFunctions'
 
 export const thunkLogin = createAsyncThunk(
   'auth/login',
@@ -85,10 +86,19 @@ export const thunkUpdateUserProfile = createAsyncThunk(
 const initialStateMemory = {
   firstName: '',
   lastName: '',
-  isEdit: false,
+  isLogin: false,
   isRememberMe: false,
   isToken: false,
+  isEdit: false,
 }
+// const persistedState = {loadState()}
+// const initialState = persistedState
+//   ? persistedState.state.auth
+//   : initialStateMemory
+
+const persistedState = loadStateLocalStorage()
+  ? loadStateLocalStorage()
+  : loadStateSessionStorage()
 
 const initialState = persistedState
   ? persistedState.state.auth
@@ -102,8 +112,10 @@ const authSlice = createSlice({
       removeTokenStorage(state.isRememberMe)
       state.firstName = ''
       state.lastName = ''
-      state.isEdit = false
+      state.isLogin = false
       state.isRememberMe = false
+      state.isToken = false
+      state.isEdit = false
     },
     actionIsEdit: (state) => {
       state.isEdit = !state.isEdit
@@ -120,13 +132,19 @@ const authSlice = createSlice({
   extraReducers: {
     [thunkLogin.fulfilled]: (state, action) => {
       state.isToken = isGetTokenStorage()
+      state.isLogin = false
     },
     [thunkLogin.rejected]: (state, action) => {
-      state.isToken = false
+      // state.isLogin = true
+      // state.isToken = false
     },
     [thunkGetUserProfile.fulfilled]: (state, action) => {
       state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
+      state.isLogin = false
+      console.log('getUser isGetTokenStorage()', isGetTokenStorage())
+      state.isToken = isGetTokenStorage()
+      // state.isToken = true
     },
     [thunkGetUserProfile.rejected]: (state) => {
       // state.isToken = false
@@ -134,11 +152,8 @@ const authSlice = createSlice({
     [thunkUpdateUserProfile.fulfilled]: (state, action) => {
       state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
-      // state.isToken = true
     },
     [thunkUpdateUserProfile.rejected]: (state) => {
-      // state.firstName = state.firstName
-      // state.lastName = state.lastName
       state.isEdit = false
     },
   },
