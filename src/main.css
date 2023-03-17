@@ -188,6 +188,7 @@ body {
   border-color: #00bc77;
   background-color: #00bc77;
   color: #fff;
+  cursor: pointer;
 }
 
 .sign-in-content {
@@ -205,6 +206,10 @@ body {
 
 .input-remember {
   display: flex;
+}
+
+#remember-me {
+  cursor: pointer;
 }
 
 .input-remember label {
@@ -296,6 +301,7 @@ body {
   font-weight: bold;
   padding: 10px;
   width: 100px;
+  cursor: pointer;
 }
 
 .header {
@@ -313,6 +319,7 @@ body {
   border-color: #00bc77;
   background-color: #00bc77;
   color: #fff;
+  cursor: pointer;
 }
 
 @media (min-width: 720px) {

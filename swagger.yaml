@@ -69,12 +69,13 @@ paths:
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
-          required: false
+          required: true
+          type: string
       produces:
         - application/json
       responses:
         '200':
-          description: User profile retrieved successully
+          description: User profile retrieved successfully
           schema:
             $ref: '#/definitions/ApiResponse'
         '400':
@@ -93,6 +94,7 @@ paths:
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+          type: string
         - in: body
           name: body
           description: Update user profile attributes
@@ -103,7 +105,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: User profile retrieved successully
+          description: User profile retrieved successfully
           schema:
             $ref: '#/definitions/ApiResponse'
         '400':
@@ -123,6 +125,7 @@ paths:
           name: Authorization
           description: Attach Bearer JWT token
           required: false  
+          type: string
       produces:
         - application/json
       responses:
@@ -141,12 +144,13 @@ paths:
       tags:
         - User Transactions Module
       summary: User Transactions API
-      description: API to view one user's transaction
+      description: API to view one user's transaction by id
       parameters:
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
-          required: false       
+          required: false
+          type: string       
       produces:
         - application/json
       responses:
@@ -164,13 +168,14 @@ paths:
       tags:
         - User Transactions Module
       summary: User Transactions API
-      description: API for updating one user's transaction
+      description: API for updating one user's transaction by id
       parameters:
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
           required: true
-        - in: body
+          type: string
+        - in: body  
           name: body
           description: Update one user's transaction
           required: true
