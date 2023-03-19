@@ -34,11 +34,9 @@ export const saveState = (type, state) => {
 }
 
 export const removeState = (type) => {
-  try {
-    type ? localStorage.removeItem('state') : sessionStorage.removeItem('state')
-  } catch {
-    // ignore write errors
-  }
+  // type ? localStorage.removeItem('state') : sessionStorage.removeItem('state')
+  sessionStorage.removeItem('state')
+  localStorage.removeItem('state')
 }
 
 // export const loadState = () => {

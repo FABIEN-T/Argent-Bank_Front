@@ -23,12 +23,6 @@ export const serviceLogin = async (email, password, isRememberMe) => {
     })
 }
 export const serviceGetUserProfile = async (dataUserProfile, isRememberMe) => {
-  // if (isRememberMe === false) {
-  //   console.log('gestUser remember', isRememberMe)
-  //   localStorage.removeItem('state')
-  //   localStorage.clear()
-
-  // const token = JSON.parse(getTokenStorage(false))
   const token = JSON.parse(getTokenStorage(isRememberMe))
   // console.log('serviceGetUserName token', token)
 
@@ -45,17 +39,14 @@ export const serviceGetUserProfile = async (dataUserProfile, isRememberMe) => {
       // console.log('getUserName data', response.data.body)
       return response.data.body
     })
-    .catch((error) => {
-      console.log('error Service user profile', error)
-      return error
-    })
+  // .catch((error) => {
+  //   console.log('error Service GET user profile : ', error.message)
+  //   return error
+  // })
 }
 
 export const serviceUpdateUserProfile = async (updateData, isRememberMe) => {
-  // const typeStorage = true // true: localStorage || false: sessionStorage
   const token = JSON.parse(getTokenStorage(isRememberMe))
-  // const token = JSON.parse(sessionStorage.getItem('token'))
-  // const esstoken = JSON.parse(token)
   // console.log('service updateData token', token)
   // console.log('service updateData', updateData)
   const headerConfig = {
@@ -72,8 +63,8 @@ export const serviceUpdateUserProfile = async (updateData, isRememberMe) => {
       // console.log('getUserName data', response.data.body)
       return response.data.body
     })
-    .catch((error) => {
-      console.log('error Service user profile', error)
-      return error
-    })
+  // .catch((error) => {
+  //   console.log('error Service UPDATE user profile : ', error.message)
+  //   return error
+  // })
 }

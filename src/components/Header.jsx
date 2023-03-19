@@ -1,18 +1,18 @@
 import { Link } from 'react-router-dom'
-import '../main.css'
-import LogoArgentBank from '../img/argentBankLogo.png'
+
 import { useSelector, useDispatch } from 'react-redux'
 import { actionLogout } from '../storeRedux/auth'
 
-import { isGetTokenStorage } from '../utils/tokenStorageFunctions'
 import { removeState } from '../utils/stateStorageFunctions'
+// import '../main.css'
+import LogoArgentBank from '../img/argentBankLogo.png'
 
 export default function Header() {
-  const { firstName, isLogin, isRememberMe } = useSelector(
+  const { firstName, isLogin, isRememberMe, isToken } = useSelector(
     (state) => state.auth
   )
   const dispatch = useDispatch()
-  const isToken = isGetTokenStorage()
+  // const isToken = isGetTokenStorage()
 
   console.log('HEADER isLogin', isLogin)
 
@@ -26,7 +26,7 @@ export default function Header() {
         />
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
-      {isToken && isLogin === false ? (
+      {isToken ? ( // isLogin à enlever ? : && isLogin === false
         <div className="headerLink">
           {/* <div className="circleName">
             <i className="fa fa-user-circle"></i>
@@ -37,11 +37,11 @@ export default function Header() {
             <i className="fa fa-user-circle"></i> {firstName}{' '}
           </Link>
           <Link
-            to="/home"
+            to="/"
             className="main-nav-item"
             onClick={() => {
               dispatch(actionLogout())
-              removeState(isRememberMe)
+              // removeState(isRememberMe)
             }}
           >
             <i className="fa fa-sign-out"></i> Sign Out

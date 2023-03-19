@@ -16,7 +16,7 @@ let myStore = {}
 
 store.subscribe(() => {
   myStore = store.getState()
-  console.log('STORE subscribe', myStore.auth.isRememberMe)
+  console.log('STORE subscribe', myStore.auth)
   const type = myStore.auth.isRememberMe
   saveState(type, {
     state: store.getState(),

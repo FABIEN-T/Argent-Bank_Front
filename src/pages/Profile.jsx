@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux'
-
+import { useEffect } from 'react'
 import Header from '../components/Header.jsx'
 import UserWelcome from '../components/UserWelcome.jsx'
 import UserTransaction from '../components/UserTransaction.jsx'
 import Footer from '../components/Footer.jsx'
 
-import { thunkGetUserProfile } from '../storeRedux/auth'
+import { thunkGetUserProfile } from '../storeRedux/thunks'
 
 export default function Profile() {
   const datasAccount = [
@@ -31,10 +31,12 @@ export default function Profile() {
   // const myStore = useStore()
   const dispatch = useDispatch()
 
-  // const { isLogin } = useSelector((state) => state.auth)
-
+  // const { errorMessage } = useSelector((state) => state.auth)
+  useEffect(() => {
+    // console.log('UserWelcome errorMessage', errorMessage)
+    dispatch(thunkGetUserProfile())
+  }, [dispatch])
   // console.log('PROFILE isLogin', isLogin)
-  dispatch(thunkGetUserProfile())
 
   // console.log('PROFILE STATE', myStore.getState().auth)
 
