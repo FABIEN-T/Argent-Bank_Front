@@ -12,7 +12,6 @@ import { removeState } from '../utils/stateStorageFunctions.js'
 export default function Home() {
   const myStore = useStore()
   console.log('HOME STATE', myStore.getState().auth)
-  let isBtnSignIn = useSelector((state) => state.auth)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(actionHome())

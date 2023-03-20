@@ -7823,10 +7823,10 @@ react-fast-compare@^2.0.1:
   resolved "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-2.0.4.tgz"
   integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
 
-react-hook-form@^7.43.1:
-  version "7.43.1"
-  resolved "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.43.1.tgz"
-  integrity sha512-+s3+s8LLytRMriwwuSqeLStVjRXFGxgjjx2jED7Z+wz1J/88vpxieRQGvJVvzrzVxshZ0BRuocFERb779m2kNg==
+react-hook-form@^7.43.7:
+  version "7.43.7"
+  resolved "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.43.7.tgz"
+  integrity sha512-38yehQkQQ5uufaPKFScs7jhLE8n3+LG9H/BZfFAiBL2+7piDmw/BrdNJV4irzMaPnWZGhmGLHVICHXNVGIuXZg==
 
 react-is@^16.13.1:
   version "16.13.1"

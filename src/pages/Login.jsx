@@ -43,7 +43,7 @@ const Login = () => {
 
   useEffect(() => {
     console.log('LOGIN errorMessage : ', errorMessage)
-    errorMessage === 'Network Error' && navigate('/erreurAPI')
+    errorMessage === 'Network Error' && navigate('/errorAPI')
   })
 
   const handleChecked = () => {
@@ -51,19 +51,13 @@ const Login = () => {
     // console.log('The checkbox was toggled', isRememberMe)
   }
 
-  const handleLogin = (formValue) => {
-    const { email, password } = formValue
-    // console.log('Login', email, password)
-    // setLoading(false)
+  const handleLogin = (e) => {
+    // e.preventDefault()
+    const { email, password } = e
     dispatch(actionHome())
-    dispatch(thunkLogin({ email, password }))
-      // .unwrap()
-      .then(() => {
-        navigate('/profile')
-      })
-    // .catch(() => {
-    //   // setLoading(true)
-    // })
+    dispatch(thunkLogin({ email, password })).then(() => {
+      navigate('/profile')
+    })
   }
 
   return (

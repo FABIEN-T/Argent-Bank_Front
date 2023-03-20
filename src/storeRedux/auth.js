@@ -32,6 +32,17 @@ const persistedState = loadStateLocalStorage()
   ? loadStateLocalStorage()
   : loadStateSessionStorage()
 
+// const persistedState = () => {
+//   if (loadStateLocalStorage()) {
+//     console.log('loadStateLocalStorage *****')
+//     loadStateLocalStorage()
+//   }
+//   if (loadStateSessionStorage()) {
+//     console.log('loadStateSessionStorage #######')
+//     loadStateSessionStorage()
+//   } else return null
+// }
+
 const initialState = persistedState
   ? persistedState.state.auth
   : initialStateMemory

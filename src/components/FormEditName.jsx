@@ -2,14 +2,13 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Formik, Field, Form, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
-
 import { actionIsEdit } from '../storeRedux/auth'
 import { thunkUpdateUserProfile } from '../storeRedux/thunks'
 import { removeState } from '../utils/stateStorageFunctions'
 
 import '../main.css'
+import RegisterForm from './ess'
+import UpName from './ess2'
 
 export default function FormEditName() {
   const dispatch = useDispatch()
@@ -19,78 +18,76 @@ export default function FormEditName() {
   )
   const [upFirstName, setUpFirstName] = useState('')
   const [upLastName, setUpLastName] = useState('')
+  // const [isInputError, setInputError] = useState('')
 
   const handleUpdate = (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     const updateData = {
       firstName: upFirstName ? upFirstName : firstName,
       lastName: upLastName ? upLastName : lastName,
     }
-
-    const initialValues = {
-      firstName: '',
-      lastName: '',
-    }
-
-    const validationSchema = Yup.object().shape({
-      firstName: Yup.string()
-        .required('Username is required')
-        .min(2, 'Username must be at least 6 characters')
-        .max(20, 'Username must not exceed 20 characters'),
-      lastName: Yup.string()
-        .required('Username is required')
-        .min(2, 'Username must be at least 6 characters')
-        .max(20, 'Username must not exceed 20 characters'),
-    })
-
-    // console.log('FormEditName', updateData)
-    // errorMessage
-    //   ? dispatch(actionIsEdit())
-    // :
     dispatch(actionIsEdit())
     dispatch(thunkUpdateUserProfile(updateData, isRememberMe))
     removeState(isRememberMe)
   }
 
   useEffect(() => {
-    errorMessage === 'Network Error' && navigate('/erreurAPI')
+    errorMessage === 'Network Error' && navigate('/errorAPI')
+    console.log('errorMessage', errorMessage)
   })
+
+  // function Ess() {
+  //   const [inputValue, setInputValue] = useState('Posez votre question ici')
+  //   return (
+  //     <div>
+  //       <textarea
+  //         value={inputValue}
+  //         onChange={(e) => setInputValue(e.target.value)}
+  //       />
+  //     </div>
+  //   )
+  // }
 
   return (
     <>
       <form>
         <div className="inputName-wrapper">
           <input
+            type="text"
             value={upFirstName}
-            placeholder={firstName}
+            placeholder={'saisissez votre prénom'}
             onChange={(event) => {
               setUpFirstName(event.target.value)
             }}
           />
+
           <div className="gapInput"></div>
           <input
+            type="text"
             value={upLastName}
-            placeholder={lastName}
+            placeholder={'saisissez votre nom'}
             onChange={(event) => {
               setUpLastName(event.target.value)
             }}
           />
         </div>
-      </form>
-      <div className="buttons-message">
-        <div className="inputName-wrapper">
-          <button className="edit-button" onClick={handleUpdate}>
-            Save
-          </button>
-          <div className="gapInput"></div>
-          <button
-            className="edit-button"
-            onClick={() => dispatch(actionIsEdit())}
-          >
-            Cancel
-          </button>
+        <div className="buttons-message">
+          <div className="inputName-wrapper">
+            <button className="edit-button" onClick={handleUpdate}>
+              Save
+            </button>
+            <div className="gapInput"></div>
+            <button
+              className="edit-button"
+              onClick={() => dispatch(actionIsEdit())}
+            >
+              Cancel
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
+
+      <UpName />
     </>
   )
 }

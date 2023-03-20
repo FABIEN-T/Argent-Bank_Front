@@ -43,7 +43,7 @@ export const thunkGetUserProfile = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString()
-      console.log('catch middleware getUserProfile :', message)
+      console.log('catch middleware GETUserProfile :', message)
       return rejectWithValue({ message })
     }
   }

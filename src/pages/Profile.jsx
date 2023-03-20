@@ -31,6 +31,7 @@ export default function Profile() {
   // const myStore = useStore()
   const dispatch = useDispatch()
 
+  const { errorMessage } = useSelector((state) => state.auth)
   // const { errorMessage } = useSelector((state) => state.auth)
   useEffect(() => {
     // console.log('UserWelcome errorMessage', errorMessage)

@@ -4,6 +4,7 @@ export const loadStateLocalStorage = () => {
     if (serializedState === null) {
       return undefined
     }
+    sessionStorage.removeItem('state')
     return JSON.parse(serializedState)
   } catch (err) {
     return undefined
@@ -24,6 +25,7 @@ export const loadStateSessionStorage = () => {
 
 export const saveState = (type, state) => {
   try {
+    console.log('stateStorage type', type)
     const serializedState = JSON.stringify(state)
     type
       ? localStorage.setItem('state', serializedState)

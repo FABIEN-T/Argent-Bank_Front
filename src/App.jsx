@@ -24,7 +24,7 @@ function App() {
         />
         {/* <Route path="/toggle" element={<Toggle />} /> */}
         {/* <Route path="*" element={<Error />} /> */}
-        <Route path="/erreurAPI" element={<Error errorNumber={503} />} />
+        <Route path="/errorAPI" element={<Error errorNumber={503} />} />
         <Route path="/*" element={<Error errorNumber={404} />} />
       </Routes>
     </Router>

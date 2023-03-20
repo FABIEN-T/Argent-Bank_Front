@@ -8,13 +8,11 @@ import { removeState } from '../utils/stateStorageFunctions'
 import LogoArgentBank from '../img/argentBankLogo.png'
 
 export default function Header() {
-  const { firstName, isLogin, isRememberMe, isToken } = useSelector(
+  const { firstName, isRememberMe, isToken } = useSelector(
     (state) => state.auth
   )
   const dispatch = useDispatch()
   // const isToken = isGetTokenStorage()
-
-  console.log('HEADER isLogin', isLogin)
 
   return (
     <nav className="main-nav">
