@@ -231,6 +231,35 @@ body {
   margin-bottom: 1rem;
 }
 
+/* .inputName-wrapper {
+  margin-bottom: 1rem;
+} */
+
+.errorNameContainer {
+  margin-top: -14px;
+}
+
+.inputNameError {
+  width: 247.5px;
+  min-height: 16px;
+  margin: 0;
+  /* text-align: center; */
+}
+
+.pFirstName,
+.pLastName {
+  /* background-color: antiquewhite; */
+  color: red;
+  font-size: 14px;
+  min-height: 16px;
+  /* margin: 0; */
+  margin: 0px 0px 2px;
+}
+
+.pLastName {
+  text-align: right;
+}
+
 .input-wrapper label {
   font-weight: bold;
 }
@@ -252,6 +281,30 @@ body {
 .gapInput {
   height: 22px;
   width: 14px;
+}
+
+@media (max-width: 500px) {
+  .inputName-wrapper-column {
+    flex-direction: column;
+    align-items: center;
+    margin: -14px 0 1rem;
+  }
+  .errorNameContainer {
+    margin-top: 0px;
+  }
+
+  .pFirstName,
+  .pLastName {
+    min-height: 16px;
+    margin: 0px 0px 1px;
+  }
+  .pLastName {
+    text-align: left;
+  }
+  .gapInput {
+    height: 6px;
+    width: 14px;
+  }
 }
 
 .footer {

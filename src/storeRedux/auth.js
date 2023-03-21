@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import {
   removeTokenStorage,
   isGetTokenStorage,
@@ -25,7 +25,7 @@ const initialStateMemory = {
   isRememberMe: false,
   isToken: false,
   isEdit: false,
-  errorMessage: '',
+  errorMessage: null,
 }
 
 const persistedState = loadStateLocalStorage()
@@ -74,7 +74,7 @@ const authSlice = createSlice({
       // }
     },
     actionHome: (state) => {
-      state.errorMessage = ''
+      state.errorMessage = null
       // state.isBtnSignIn = true
     },
   },
@@ -86,7 +86,7 @@ const authSlice = createSlice({
       //   ? loadStateLocalStorage()
       //   : loadStateSessionStorage()
       // state.isLogin = false
-      state.errorMessage = ''
+      state.errorMessage = null
     },
     [thunkLogin.pending]: (state, action) => {
       state.isLoading = true
@@ -106,7 +106,7 @@ const authSlice = createSlice({
       // console.log('getUser isGetTokenStorage()', isGetTokenStorage())
       state.isToken = isGetTokenStorage()
       // state.isToken = true
-      state.errorMessage = ''
+      state.errorMessage = null
       // state.isBtnSignIn = false
     },
     [thunkGetUserProfile.rejected]: (state, action) => {
@@ -117,7 +117,7 @@ const authSlice = createSlice({
     [thunkUpdateUserProfile.fulfilled]: (state, action) => {
       state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
-      state.errorMessage = ''
+      state.errorMessage = null
     },
     [thunkUpdateUserProfile.rejected]: (state, action) => {
       console.log('Error 500 UP')

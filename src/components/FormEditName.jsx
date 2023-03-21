@@ -50,7 +50,7 @@ export default function FormEditName() {
 
   return (
     <>
-      <form>
+      {/* <form>
         <div className="inputName-wrapper">
           <input
             type="text"
@@ -85,7 +85,7 @@ export default function FormEditName() {
             </button>
           </div>
         </div>
-      </form>
+      </form> */}
 
       <UpName />
     </>

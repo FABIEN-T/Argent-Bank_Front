@@ -39,46 +39,53 @@ export default function Upname() {
 
   return (
     <form>
-      <div className="inputName-wrapper">
-        <input
-          {...register('firstName', {
-            required: true,
-            maxLength: 20,
-            pattern: /^[a-zA-Z\s\-À-ÖØ-öø-ÿ']+$/g,
-          })}
-        />
-        <div className="gapInput"></div>
-        <input
-          {...register('lastName', {
-            required: true,
-            maxLength: 20,
-            pattern: /^[a-zA-Z\s\-À-ÖØ-öø-ÿ']+$/g,
-          })}
-        />
-      </div>
-      <div className="inputName-wrapper">
-        <div>
-          {errors?.lastName?.type === 'required' && (
-            <p>This field is required</p>
-          )}
-          {errors?.lastName?.type === 'maxLength' && (
-            <p>First name cannot exceed 20 characters</p>
-          )}
-          {errors?.lastName?.type === 'pattern' && (
-            <p>Alphabetical characters only</p>
-          )}
+      {/* <div className="inputError-wrapper"> */}
+      {/* <div className="gapInput"></div> */}
+
+      {/* </div> */}
+      <div className="inputName-wrapper inputName-wrapper-column">
+        <div className="errorNameContainer">
+          <div className="inputNameError">
+            {errors?.firstName?.type === 'required' && (
+              <p className="pFirstName">This field is required</p>
+            )}
+            {errors?.firstName?.type === 'maxLength' && (
+              <p className="pFirstName">Cannot exceed 20 characters</p>
+            )}
+            {errors?.firstName?.type === 'pattern' && (
+              <p className="pFirstName">Alphabetical characters only</p>
+            )}
+          </div>
+          <input
+            placeholder="saisissez votre prénom"
+            {...register('firstName', {
+              required: true,
+              maxLength: 20,
+              pattern: /^[a-zA-Z\s\-À-ÖØ-öø-ÿ']+$/g,
+            })}
+          />
         </div>
         <div className="gapInput"></div>
-        <div>
-          {errors?.firstName?.type === 'required' && (
-            <p>This field is required</p>
-          )}
-          {errors?.firstName?.type === 'maxLength' && (
-            <p>First name cannot exceed 20 characters</p>
-          )}
-          {errors?.firstName?.type === 'pattern' && (
-            <p>Alphabetical characters only</p>
-          )}
+        <div className="errorNameContainer">
+          <div className="inputNameError">
+            {errors?.lastName?.type === 'required' && (
+              <p className="pLastName">This field is required</p>
+            )}
+            {errors?.lastName?.type === 'maxLength' && (
+              <p className="pLastName">Cannot exceed 20 characters</p>
+            )}
+            {errors?.lastName?.type === 'pattern' && (
+              <p className="pLastName">Alphabetical characters only</p>
+            )}
+          </div>
+          <input
+            placeholder="saisissez votre nom"
+            {...register('lastName', {
+              required: true,
+              maxLength: 20,
+              pattern: /^[a-zA-Z\s\-À-ÖØ-öø-ÿ']+$/g,
+            })}
+          />
         </div>
       </div>
       {/* <div className="buttons-message"> */}
