@@ -59,14 +59,14 @@ body {
   color: #42b983;
 }
 
+.main-nav-items {
+  display: flex;
+  flex-direction: row;
+}
+
 .main-nav-item {
   text-decoration: none;
   margin-right: 0.5rem;
-}
-
-.headerLink {
-  display: flex;
-  flex-direction: row;
 }
 
 .circleName {
@@ -283,30 +283,6 @@ body {
   width: 14px;
 }
 
-@media (max-width: 500px) {
-  .inputName-wrapper-column {
-    flex-direction: column;
-    align-items: center;
-    margin: -14px 0 1rem;
-  }
-  .errorNameContainer {
-    margin-top: 0px;
-  }
-
-  .pFirstName,
-  .pLastName {
-    min-height: 16px;
-    margin: 0px 0px 1px;
-  }
-  .pLastName {
-    text-align: left;
-  }
-  .gapInput {
-    height: 6px;
-    width: 14px;
-  }
-}
-
 .footer {
   justify-content: center;
   border-top: 2px solid #ccc;
@@ -406,5 +382,110 @@ body {
 
   .transaction-button {
     width: 200px;
+  }
+}
+
+/* Page Error */
+.error {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  box-sizing: border-box;
+  padding: 80px 20px 0;
+}
+
+.error .titleError {
+  color: #00bc77;
+  margin: 0 auto;
+  font-size: 150px;
+  font-weight: 700;
+}
+
+.error .paragraph {
+  margin: 0 auto 80px;
+  color: black;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.errorLink {
+  margin: 0 auto;
+  color: black;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.errorLink:hover {
+  color: #00bc77;
+}
+
+@media (max-width: 500px) {
+  /* Home features */
+  .feature-item {
+    padding: 0.8rem 2.5rem;
+  }
+
+  /* Header */
+  .main-nav {
+    flex-direction: column;
+    padding: 0px 20px;
+  }
+
+  .main-nav-items {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .main-nav-item {
+    margin: -5px 0 6px;
+  }
+
+  .main-nav-gap {
+    width: 5%;
+  }
+
+  .inputName-wrapper-column {
+    flex-direction: column;
+    align-items: center;
+    margin: -14px 0 1rem;
+  }
+
+  .errorNameContainer {
+    margin-top: 0px;
+  }
+
+  .pFirstName,
+  .pLastName {
+    min-height: 16px;
+    margin: 0px 0px 1px;
+  }
+  .pLastName {
+    text-align: left;
+  }
+  .gapInput {
+    height: 6px;
+    width: 14px;
+  }
+  /* Page Error */
+
+  .error .titleError {
+    color: #00bc77;
+    margin: 0 auto;
+    font-size: 120px;
+    font-weight: 700;
+  }
+
+  .error .paragraph {
+    margin: 0 auto 160px;
+    color: black;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .errorLink {
+    margin: 0 auto;
+    color: black;
+    font-size: 22px;
+    font-weight: 700;
   }
 }

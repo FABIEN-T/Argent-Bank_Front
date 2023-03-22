@@ -37,7 +37,7 @@
 import { Link } from 'react-router-dom'
 import Header from '../components/Header.jsx'
 import PropTypes from 'prop-types'
-import './_error.scss'
+import Footer from '../components/Footer.jsx'
 
 /**
  * Component displaying a page indicating
@@ -55,12 +55,13 @@ function Error({ errorNumber }) {
     <>
       <Header />
       <main className="error">
-        <h2 className="error__titleError">{errorNumber}</h2>
-        <p className="error__paragraph">{text}</p>
-        <Link to="/" className="error__errorLink">
+        <h2 className="titleError">{errorNumber}</h2>
+        <p className="paragraph">{text}</p>
+        <Link to="/" className="errorLink">
           Retourner sur la page d’accueil
         </Link>
       </main>
+      <Footer />
     </>
   )
 }

@@ -25,7 +25,7 @@ export default function Header() {
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
       {isToken ? ( // isLogin à enlever ? : && isLogin === false
-        <div className="headerLink">
+        <div className="main-nav-items">
           {/* <div className="circleName">
             <i className="fa fa-user-circle"></i>
             <div className="faFirstName">{firstName} </div>
@@ -34,6 +34,7 @@ export default function Header() {
           <Link to="/profile" className="main-nav-item">
             <i className="fa fa-user-circle"></i> {firstName}{' '}
           </Link>
+          <div className="main-nav-gap"></div>
           <Link
             to="/"
             className="main-nav-item"
