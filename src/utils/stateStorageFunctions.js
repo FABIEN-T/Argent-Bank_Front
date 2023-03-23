@@ -24,8 +24,8 @@ export const loadStateSessionStorage = () => {
   }
 }
 
-// Sauvegarde du state dans le storage :
-//    - local si "Remember me" coché
+// Sauvegarde du state dans le storage du navigateur:
+//    - local si "Remember me" coché (type === true)
 //    - session si "Remember me" décoché
 export const saveState = (type, state) => {
   try {
