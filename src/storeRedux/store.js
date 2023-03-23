@@ -1,8 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from './auth'
 
-import { removeState, saveState } from '../utils/stateStorageFunctions'
-// import throttle from 'lodash.throttle'
+import { saveState } from '../utils/stateStorageFunctions'
 
 const store = configureStore({
   reducer: {
@@ -12,18 +11,12 @@ const store = configureStore({
 })
 
 export default store
-let myStore = {}
 
+let myStore = {}
 store.subscribe(() => {
   myStore = store.getState()
-  console.log('STORE subscribe', myStore.auth)
   const type = myStore.auth.isRememberMe
-  if (type !== null) {
-    saveState(type, {
-      state: store.getState(),
-    })
-  }
-  // else {
-  //   removeState(type)
-  // }
+  saveState(type, {
+    state: store.getState(),
+  })
 })

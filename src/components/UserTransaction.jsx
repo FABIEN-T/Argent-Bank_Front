@@ -1,9 +1,6 @@
-export default function UserTransaction({
-  title,
-  amount,
-  description,
-  transactionBtn,
-}) {
+import PropTypes from 'prop-types'
+
+export default function UserTransaction({ title, amount, description }) {
   return (
     <section className="account">
       <div className="account-content-wrapper">
@@ -12,8 +9,14 @@ export default function UserTransaction({
         <p className="account-amount-description">{description} </p>
       </div>
       <div className="account-content-wrapper cta">
-        <button className="transaction-button">{transactionBtn} </button>
+        <button className="transaction-button">View transactions </button>
       </div>
     </section>
   )
+}
+
+UserTransaction.propTypes = {
+  title: PropTypes.string,
+  amount: PropTypes.string,
+  description: PropTypes.string,
 }

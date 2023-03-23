@@ -194,6 +194,7 @@ body {
 .sign-in-content {
   box-sizing: border-box;
   background-color: white;
+  border: #12002b 1px solid;
   width: 300px;
   margin: 0 auto;
   margin-top: 3rem;
@@ -231,33 +232,28 @@ body {
   margin-bottom: 1rem;
 }
 
-/* .inputName-wrapper {
-  margin-bottom: 1rem;
-} */
-
-.errorNameContainer {
+.inputContainer {
   margin-top: -14px;
 }
 
 .inputNameError {
-  width: 247.5px;
+  width: 216px;
   min-height: 16px;
   margin: 0;
-  /* text-align: center; */
 }
 
-.pFirstName,
-.pLastName {
-  /* background-color: antiquewhite; */
+.pErrorName {
+  width: 216px;
   color: red;
   font-size: 14px;
   min-height: 16px;
-  /* margin: 0; */
   margin: 0px 0px 2px;
 }
 
-.pLastName {
-  text-align: right;
+.pErrorlogin {
+  color: red;
+  font-size: 14px;
+  margin: 0px 0px -10px;
 }
 
 .input-wrapper label {
@@ -268,14 +264,6 @@ body {
 .inputName-wrapper input {
   padding: 5px;
   font-size: 1.2rem;
-}
-
-/* .form-control {
-  background-color: rgba(255, 0, 0, 0.5);
-  color: red;
-} */
-.alertInput {
-  color: red;
 }
 
 .gapInput {
@@ -450,7 +438,7 @@ body {
     margin: -14px 0 1rem;
   }
 
-  .errorNameContainer {
+  .inputContainer {
     margin-top: 0px;
   }
 
@@ -466,8 +454,8 @@ body {
     height: 6px;
     width: 14px;
   }
-  /* Page Error */
 
+  /* Page Error */
   .error .titleError {
     color: #00bc77;
     margin: 0 auto;

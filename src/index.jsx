@@ -1,18 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-// import './styles/index.scss'
-import App from './App'
 import reportWebVitals from './reportWebVitals'
-
 import { Provider } from 'react-redux'
 
+import App from './App'
 import store from './storeRedux/store'
-
-/**
- * @file index.js –
- * @author Fabien_Varlet
- * @see <a href="https://github.com/FABIEN-T/P13_Argent-Bank_Front">Repo git</a>
- */
 
 const root = createRoot(document.getElementById('root'))
 

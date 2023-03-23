@@ -1,8 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { actionIsEdit } from '../storeRedux/auth'
 import { thunkUpdateUserProfile } from '../storeRedux/thunks'
@@ -10,22 +7,17 @@ import { removeState } from '../utils/stateStorageFunctions'
 
 export default function Upname() {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const { firstName, lastName, isRememberMe, errorMessage } = useSelector(
+  const { firstName, lastName, isRememberMe } = useSelector(
     (state) => state.auth
   )
-  const [upFirstName, setUpFirstName] = useState('')
-  const [upLastName, setUpLastName] = useState('')
+
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm()
 
   const save = (data) => {
-    console.log('save', data)
-    // alert(JSON.stringify(data))
     const updateData = {
       firstName: data.firstName ? data.firstName : firstName,
       lastName: data.lastName ? data.lastName : lastName,
@@ -35,28 +27,23 @@ export default function Upname() {
     removeState(isRememberMe)
   }
 
-  console.log(watch('example')) // you can watch individual input by pass the name of the input
-
   return (
     <form>
-      {/* <div className="inputError-wrapper"> */}
-      {/* <div className="gapInput"></div> */}
-
-      {/* </div> */}
       <div className="inputName-wrapper inputName-wrapper-column">
-        <div className="errorNameContainer">
+        <div className="inputContainer">
           <div className="inputNameError">
             {errors?.firstName?.type === 'required' && (
-              <p className="pFirstName">This field is required</p>
+              <p className="pErrorName">This field is required</p>
             )}
             {errors?.firstName?.type === 'maxLength' && (
-              <p className="pFirstName">Cannot exceed 20 characters</p>
+              <p className="pErrorName">Cannot exceed 20 characters</p>
             )}
             {errors?.firstName?.type === 'pattern' && (
-              <p className="pFirstName">Alphabetical characters only</p>
+              <p className="pErrorName">Alphabetical characters only</p>
             )}
           </div>
           <input
+            name="firstName"
             placeholder="saisissez votre prénom"
             {...register('firstName', {
               required: true,
@@ -66,19 +53,24 @@ export default function Upname() {
           />
         </div>
         <div className="gapInput"></div>
-        <div className="errorNameContainer">
+        <div className="inputContainer">
           <div className="inputNameError">
             {errors?.lastName?.type === 'required' && (
-              <p className="pLastName">This field is required</p>
+              <p className="pErrorName pLastName">This field is required</p>
             )}
             {errors?.lastName?.type === 'maxLength' && (
-              <p className="pLastName">Cannot exceed 20 characters</p>
+              <p className="pErrorName pLastName">
+                Cannot exceed 20 characters
+              </p>
             )}
             {errors?.lastName?.type === 'pattern' && (
-              <p className="pLastName">Alphabetical characters only</p>
+              <p className="pErrorName pLastName">
+                Alphabetical characters only
+              </p>
             )}
           </div>
           <input
+            name="lastName"
             placeholder="saisissez votre nom"
             {...register('lastName', {
               required: true,
@@ -88,7 +80,6 @@ export default function Upname() {
           />
         </div>
       </div>
-      {/* <div className="buttons-message"> */}
       <div className="inputName-wrapper">
         <button className="edit-button" onClick={handleSubmit(save)}>
           Save
@@ -101,8 +92,6 @@ export default function Upname() {
           Cancel
         </button>
       </div>
-      {/* </div> */}
-      {/* <input type="submit" /> */}
     </form>
   )
 }

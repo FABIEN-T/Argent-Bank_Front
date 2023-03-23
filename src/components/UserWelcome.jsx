@@ -13,7 +13,6 @@ export default function UserWelcome() {
   )
 
   useEffect(() => {
-    console.log('UserWelcome errorMessage', errorMessage)
     errorMessage === 'Network Error' && navigate('/errorAPI')
   })
 
@@ -36,12 +35,6 @@ export default function UserWelcome() {
           >
             Edit Name
           </button>
-          {errorMessage === 'Network Error' && (
-            <h3 className="impossible-edit">
-              Edition impossible : Serveur non disponible, veuillez réessayer
-              plus tard !
-            </h3>
-          )}
         </>
       )}
     </div>
