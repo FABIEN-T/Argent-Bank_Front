@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { actionIsRememberMe } from '../storeRedux/auth'
-import { thunkLogin } from '../storeRedux/thunks'
+import { thunkLogin } from '../storeRedux/middleware'
 import { actionHome } from '../storeRedux/auth'
 
 import Header from '../components/Header.jsx'

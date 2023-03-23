@@ -2,7 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector, useDispatch } from 'react-redux'
 import { actionIsEdit } from '../storeRedux/auth'
-import { thunkUpdateUserProfile } from '../storeRedux/thunks'
+import { thunkUpdateUserProfile } from '../storeRedux/middleware'
 import { removeState } from '../utils/stateStorageFunctions'
 
 export default function Upname() {
@@ -24,7 +24,7 @@ export default function Upname() {
     }
     dispatch(actionIsEdit())
     dispatch(thunkUpdateUserProfile(updateData, isRememberMe))
-    removeState(isRememberMe)
+    removeState()
   }
 
   return (

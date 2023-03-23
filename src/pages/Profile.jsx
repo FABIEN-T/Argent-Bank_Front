@@ -5,7 +5,7 @@ import UserWelcome from '../components/UserWelcome.jsx'
 import UserTransaction from '../components/UserTransaction.jsx'
 import Footer from '../components/Footer.jsx'
 
-import { thunkGetUserProfile } from '../storeRedux/thunks'
+import { thunkGetUserProfile } from '../storeRedux/middleware'
 
 export default function Profile() {
   const datasAccount = [

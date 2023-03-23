@@ -5,6 +5,7 @@ import {
   serviceUpdateUserProfile,
 } from '../services/auth.service'
 
+// Page Login : Authentification de l'utilisateur
 export const thunkLogin = createAsyncThunk(
   'auth/login',
   async ({ email, password }, { getState, rejectWithValue }) => {
@@ -24,6 +25,7 @@ export const thunkLogin = createAsyncThunk(
   }
 )
 
+// Page Profile : Récupération  du prénom et du nom depuis la base de données
 export const thunkGetUserProfile = createAsyncThunk(
   'auth/getUserProfile',
   async (payloadUserProfile, { getState, rejectWithValue }) => {
@@ -42,6 +44,7 @@ export const thunkGetUserProfile = createAsyncThunk(
   }
 )
 
+// Page Profile : Mise à jour du prénom et du nom dans la base de données
 export const thunkUpdateUserProfile = createAsyncThunk(
   'auth/updateUserProfile',
   async (payloadUpdateData, { getState, rejectWithValue }) => {
