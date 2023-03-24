@@ -11,8 +11,8 @@ export const mwLogin = createAsyncThunk(
   async ({ email, password }, { getState, rejectWithValue }) => {
     try {
       const isRememberMe = getState().auth.isRememberMe
-      const data = await serviceLogin(email, password, isRememberMe)
-      return { data }
+      // retourne l'email et le mot de passe au backend pour authentification
+      return await serviceLogin(email, password, isRememberMe)
     } catch (error) {
       const message =
         (error.response &&
@@ -20,6 +20,7 @@ export const mwLogin = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString()
+      // retourne le emssage d'erreur récupéré
       return rejectWithValue({ message })
     }
   }
@@ -31,6 +32,7 @@ export const mwGetUserProfile = createAsyncThunk(
   async (payloadUserProfile, { getState, rejectWithValue }) => {
     try {
       const isRememberMe = getState().auth.isRememberMe
+      // retourne le prénom et le nom de l'utilisateur dans la page profile
       return await serviceGetUserProfile(payloadUserProfile, isRememberMe)
     } catch (error) {
       const message =
@@ -39,6 +41,7 @@ export const mwGetUserProfile = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString()
+      // retourne le emssage d'erreur récupéré
       return rejectWithValue({ message })
     }
   }
@@ -50,6 +53,7 @@ export const mwUpdateUserProfile = createAsyncThunk(
   async (payloadUpdateData, { getState, rejectWithValue }) => {
     try {
       const isRememberMe = getState().auth.isRememberMe
+      // retourne le prénom et le nom modifiés de l'utilisateur dans la page profile et dans la base de données
       return await serviceUpdateUserProfile(payloadUpdateData, isRememberMe)
     } catch (error) {
       const message =
@@ -58,6 +62,7 @@ export const mwUpdateUserProfile = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString()
+      // retourne le message d'erreur récupéré
       return rejectWithValue({ message })
     }
   }

@@ -29,7 +29,7 @@ export default function Profile() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    // appel de la modification du prénom et du nom de l'Utilisateur dans la base de données
+    // appel de la fonction de récupération du prénom et du nom de l'Utilisateur dans la base de données
     dispatch(mwGetUserProfile())
   }, [dispatch])
 

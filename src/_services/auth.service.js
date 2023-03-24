@@ -19,7 +19,6 @@ export const serviceLogin = async (email, password, isRememberMe) => {
         // mémorisation du token dans le storage du navigateur
         setTokenStorage(isRememberMe, token)
       }
-      return response.data
     })
 }
 
@@ -37,6 +36,7 @@ export const serviceGetUserProfile = async (dataUserProfile, isRememberMe) => {
   return await axios
     .post(API_URL + 'profile', dataUserProfile, headerConfig)
     .then((response) => {
+      // retourne les données de l'utilisateur
       return response.data.body
     })
 }
@@ -56,6 +56,7 @@ export const serviceUpdateUserProfile = async (updateData, isRememberMe) => {
   return await axios
     .put(API_URL + 'profile', updateData, headerConfig)
     .then((response) => {
+      // retourne les données modifiées de l'utilisateur
       return response.data.body
     })
 }
