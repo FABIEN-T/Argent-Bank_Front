@@ -1,16 +1,16 @@
 import { useSelector, useDispatch } from 'react-redux'
 
 import FormEditName from './FormEditName.jsx'
-import { actionIsEdit } from '../storeRedux/auth.js'
+import { actionToggleEdit } from '../_features/auth.slice.js'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export default function UserWelcome() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { isEdit, firstName, lastName, errorMessage } = useSelector(
+  const { toggleEdit, firstName, lastName, errorMessage } = useSelector(
     (state) => state.auth
-  )
+  ) // récupération des élements du state
 
   useEffect(() => {
     errorMessage === 'Network Error' && navigate('/errorAPI')
@@ -23,14 +23,15 @@ export default function UserWelcome() {
         <br />
         {firstName} {lastName}!
       </h1>
-      {isEdit ? (
+      {toggleEdit ? (
         <FormEditName />
       ) : (
         <>
           <button
             className="edit-button"
             onClick={() => {
-              dispatch(actionIsEdit())
+              // appel de l'action "toggle" d'ouverture/fermeture du formulaire d'édition (prénom, nom)
+              dispatch(actionToggleEdit())
             }}
           >
             Edit Name

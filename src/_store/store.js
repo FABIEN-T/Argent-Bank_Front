@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import authReducer from './auth'
+import authReducer from '../_features/auth.slice.js'
 
-import { saveState } from '../utils/stateStorageFunctions'
+import { saveState } from '../_utils/stateStorageFunctions'
 
 // Création du store
 const store = configureStore({

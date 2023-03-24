@@ -1,15 +1,15 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector, useDispatch } from 'react-redux'
-import { actionIsEdit } from '../storeRedux/auth'
-import { thunkUpdateUserProfile } from '../storeRedux/middleware'
-import { removeState } from '../utils/stateStorageFunctions'
+import { actionToggleEdit } from '../_features/auth.slice.js'
+import { mwUpdateUserProfile } from '../_middlewares/middlewares'
+import { removeState } from '../_utils/stateStorageFunctions'
 
-export default function Upname() {
+export default function FormEditName() {
   const dispatch = useDispatch()
   const { firstName, lastName, isRememberMe } = useSelector(
     (state) => state.auth
-  )
+  ) // récupération des élements du state
 
   const {
     register,
@@ -22,8 +22,10 @@ export default function Upname() {
       firstName: data.firstName ? data.firstName : firstName,
       lastName: data.lastName ? data.lastName : lastName,
     }
-    dispatch(actionIsEdit())
-    dispatch(thunkUpdateUserProfile(updateData, isRememberMe))
+    // appel de l'action "toggle" d'ouverture/fermeture du formulaire d'édition
+    dispatch(actionToggleEdit())
+    // appel de la fonction de modification du prénom et du nom de l'utilisateur dans la base de données
+    dispatch(mwUpdateUserProfile(updateData, isRememberMe))
     removeState()
   }
 
@@ -80,6 +82,7 @@ export default function Upname() {
           />
         </div>
       </div>
+
       <div className="inputName-wrapper">
         <button className="edit-button" onClick={handleSubmit(save)}>
           Save
@@ -87,7 +90,7 @@ export default function Upname() {
         <div className="gapInput"></div>
         <button
           className="edit-button"
-          onClick={() => dispatch(actionIsEdit())}
+          onClick={() => dispatch(actionToggleEdit())}
         >
           Cancel
         </button>

@@ -1,4 +1,4 @@
-// Sauvegarde du token dans le storage du navigateur :
+// Récupération du token dans le storage du navigateur :
 //    - local si "Remember me" coché (type === true)
 //    - session si "Remember me" décoché (type === false)
 export function getTokenStorage(type) {
@@ -19,7 +19,7 @@ export function setTokenStorage(type, val) {
     : sessionStorage.setItem('token', val)
 }
 
-// true si token mémorisé dans le storage du navigateur (local ou session)
+// vérifie si le token est mémorisé dans le storage du navigateur (local ou session)
 export function isGetTokenStorage() {
   if (localStorage.getItem('token') || sessionStorage.getItem('token')) {
     return true

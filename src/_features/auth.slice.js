@@ -4,19 +4,19 @@ import { createSlice } from '@reduxjs/toolkit'
 import {
   removeTokenStorage,
   isGetTokenStorage,
-} from '../utils/tokenStorageFunctions'
+} from '../_utils/tokenStorageFunctions'
 //State
 import {
   loadStateLocalStorage,
   loadStateSessionStorage,
   removeState,
-} from '../utils/stateStorageFunctions'
+} from '../_utils/stateStorageFunctions'
 // Middlewares
 import {
-  thunkLogin,
-  thunkGetUserProfile,
-  thunkUpdateUserProfile,
-} from './middleware'
+  mwLogin,
+  mwGetUserProfile,
+  mwUpdateUserProfile,
+} from '../_middlewares/middlewares'
 
 const initialStateMemory = {
   firstName: '',
@@ -24,11 +24,11 @@ const initialStateMemory = {
   isLoading: false,
   isRememberMe: false,
   isToken: false,
-  isEdit: false,
+  toggleEdit: false,
   errorMessage: null,
 }
 
-// Si local storag non chargé alors charger session storage
+// Si local storage non chargé alors charger session storage
 const persistedState = loadStateLocalStorage()
   ? loadStateLocalStorage()
   : loadStateSessionStorage()
@@ -42,7 +42,7 @@ const authSlice = createSlice({
   name: 'authentification',
   initialState,
   reducers: {
-    // action appelée lors du clic sur Sign out
+    // action de réinitialisation lors du clic sur Sign out (déconnexion)
     actionLogout: (state) => {
       removeTokenStorage(state.isRememberMe)
       removeState()
@@ -51,60 +51,67 @@ const authSlice = createSlice({
       state.isLoading = false
       state.isRememberMe = false
       state.isToken = false
-      state.isEdit = false
+      state.toggleEdit = false
     },
     // action "toggle" d'ouverture/fermeture du formulaire d'édition
-    actionIsEdit: (state) => {
-      state.isEdit = !state.isEdit
+    actionToggleEdit: (state) => {
+      state.toggleEdit = !state.toggleEdit
     },
-    // action "toggle" du checkbox "Remember me" de la modale Login (page Login)
+    // action "toggle" du checkbox "Remember me" du formulaire d'authentification (page Login)
     actionIsRememberMe: (state) => {
       state.isRememberMe = !state.isRememberMe
     },
-    // action permettant de réinitialiser le message d'erreur
-    actionHome: (state) => {
+    // action de réinitialisation du message d'erreur
+    actionInitErrorMessage: (state) => {
       state.errorMessage = null
     },
   },
 
   extraReducers: {
-    [thunkLogin.fulfilled]: (state) => {
-      // Booleen isToken : token dans le storage du navigateur  ?
+    // mw : middleware
+    //Login
+    [mwLogin.fulfilled]: (state) => {
+      // Booleen isToken : token est-il présent dans le storage du navigateur ?
       state.isToken = isGetTokenStorage()
       state.errorMessage = null
     },
-    [thunkLogin.pending]: (state) => {
+    [mwLogin.pending]: (state) => {
       state.isLoading = true // début du chargement
     },
-    [thunkLogin.rejected]: (state, action) => {
+    [mwLogin.rejected]: (state, action) => {
       state.isLoading = false // fin du chargement
       state.errorMessage = action.payload.message // récupération du message d'erreur
     },
 
-    [thunkGetUserProfile.fulfilled]: (state, action) => {
+    // Profile : récupération du prénom et du nom de l'Utilisateur dans la base de données
+    [mwGetUserProfile.fulfilled]: (state, action) => {
       state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
       state.isLoading = false
       state.isToken = isGetTokenStorage()
       state.errorMessage = null
     },
-    [thunkGetUserProfile.rejected]: (state, action) => {
+    [mwGetUserProfile.rejected]: (state, action) => {
       state.errorMessage = action.payload.message // récupération du message d'erreur
     },
 
-    [thunkUpdateUserProfile.fulfilled]: (state, action) => {
-      // Update prénom et nom
-      state.firstName = action.payload.firstNamees
+    // Profile : modification du prénom et du nom de l'Utilisateur dans la base de données
+    [mwUpdateUserProfile.fulfilled]: (state, action) => {
+      state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
       state.errorMessage = null
     },
-    [thunkUpdateUserProfile.rejected]: (state, action) => {
-      state.isEdit = false // "toggle" d'ouverture/fermeture du formulaire d'édition
+    [mwUpdateUserProfile.rejected]: (state, action) => {
+      state.toggleEdit = false // "toggle" d'ouverture/fermeture du formulaire d'édition
       state.errorMessage = action.payload.message
     },
   },
 })
 
-export const { actionIsRememberMe, actionIsEdit, actionLogout, actionHome } =
-  authSlice.actions
+export const {
+  actionIsRememberMe,
+  actionToggleEdit,
+  actionLogout,
+  actionInitErrorMessage,
+} = authSlice.actions
 export default authSlice.reducer

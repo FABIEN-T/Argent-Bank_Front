@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux'
 export default function PrivateRoute({ children }) {
   const isToken = useSelector((state) => state.auth.isToken)
   if (isToken === false) {
-    // si token inexistant redirection vers la page login
+    // si token absent : redirection vers la page login
     return <Navigate to="/login" />
   }
-  // si token existant retpouner child components
+  // si token existant : retourner les composants enfants (Profile)
   return children
 }

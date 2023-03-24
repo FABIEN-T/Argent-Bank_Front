@@ -5,7 +5,7 @@ import UserWelcome from '../components/UserWelcome.jsx'
 import UserTransaction from '../components/UserTransaction.jsx'
 import Footer from '../components/Footer.jsx'
 
-import { thunkGetUserProfile } from '../storeRedux/middleware'
+import { mwGetUserProfile } from '../_middlewares/middlewares'
 
 export default function Profile() {
   const datasAccount = [
@@ -29,7 +29,8 @@ export default function Profile() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(thunkGetUserProfile())
+    // appel de la modification du prénom et du nom de l'Utilisateur dans la base de données
+    dispatch(mwGetUserProfile())
   }, [dispatch])
 
   return (

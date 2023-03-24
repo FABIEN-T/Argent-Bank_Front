@@ -2,11 +2,11 @@ import axios from 'axios'
 import {
   setTokenStorage,
   getTokenStorage,
-} from '../utils/tokenStorageFunctions'
+} from '../_utils/tokenStorageFunctions'
 
 const API_URL = 'http://localhost:3001/api/v1/user/'
 
-// Page Login : Authentification de l'utilisateur avec email et mote de passe, mémorisation token dans le storage du navigateur
+// Page Login : Authentification de l'utilisateur par email et mot de passe,
 export const serviceLogin = async (email, password, isRememberMe) => {
   return await axios
     .post(API_URL + 'login', {
@@ -16,18 +16,17 @@ export const serviceLogin = async (email, password, isRememberMe) => {
     .then((response) => {
       if (response.data.body.token) {
         const token = JSON.stringify(response.data.body.token)
-        // mémorisation token dans le storage du navigateur
+        // mémorisation du token dans le storage du navigateur
         setTokenStorage(isRememberMe, token)
       }
       return response.data
     })
 }
 
-// Page Profile : Récupération  du prénom et du nom depuis la base de données
-
+// Page Profile : Récupération  du prénom et du nom dans la base de données
 export const serviceGetUserProfile = async (dataUserProfile, isRememberMe) => {
   const token = JSON.parse(getTokenStorage(isRememberMe))
-  // recupération du token depuis le storage du navigateur et utilisation dans le header pour autorisation
+  // recupération du token depuis le storage du navigateur et implémentation dans le header pour autorisation
   const headerConfig = {
     headers: {
       Accept: 'application/json',

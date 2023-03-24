@@ -3,10 +3,10 @@ import {
   serviceLogin,
   serviceGetUserProfile,
   serviceUpdateUserProfile,
-} from '../services/auth.service'
+} from '../_services/auth.service'
 
-// Page Login : Authentification de l'utilisateur
-export const thunkLogin = createAsyncThunk(
+// Page Login : Authentification de l'Utilisateur
+export const mwLogin = createAsyncThunk(
   'auth/login',
   async ({ email, password }, { getState, rejectWithValue }) => {
     try {
@@ -26,7 +26,7 @@ export const thunkLogin = createAsyncThunk(
 )
 
 // Page Profile : Récupération  du prénom et du nom depuis la base de données
-export const thunkGetUserProfile = createAsyncThunk(
+export const mwGetUserProfile = createAsyncThunk(
   'auth/getUserProfile',
   async (payloadUserProfile, { getState, rejectWithValue }) => {
     try {
@@ -45,7 +45,7 @@ export const thunkGetUserProfile = createAsyncThunk(
 )
 
 // Page Profile : Mise à jour du prénom et du nom dans la base de données
-export const thunkUpdateUserProfile = createAsyncThunk(
+export const mwUpdateUserProfile = createAsyncThunk(
   'auth/updateUserProfile',
   async (payloadUpdateData, { getState, rejectWithValue }) => {
     try {

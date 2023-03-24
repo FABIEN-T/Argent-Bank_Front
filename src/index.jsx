@@ -4,7 +4,7 @@ import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
 
 import App from './App'
-import store from './storeRedux/store'
+import store from './_store/store.js'
 
 const root = createRoot(document.getElementById('root'))
 

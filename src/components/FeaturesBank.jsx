@@ -4,7 +4,7 @@ import IconChat from '../img/icon-chat.png'
 import IconMoney from '../img/icon-money.png'
 import IconSecurity from '../img/icon-security.png'
 
-export default function Features() {
+export default function FeaturesBank() {
   const datasFeature = [
     {
       icon: IconChat,

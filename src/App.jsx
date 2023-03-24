@@ -20,7 +20,7 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route path="/errorAPI" element={<Error errorNumber={503} />} />
+        <Route path="/errorAPI" element={<Error errorNumber={500} />} />
         <Route path="/*" element={<Error errorNumber={404} />} />
       </Routes>
     </Router>

@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux'
-import { actionHome } from '../storeRedux/auth'
+import { actionInitErrorMessage } from '../_features/auth.slice.js'
 import { useEffect } from 'react'
 
 import Header from '../components/Header.jsx'
 import Banner from '../components/Banner.jsx'
-import Features from '../components/Features.jsx'
+import FeaturesBank from '../components/FeaturesBank.jsx'
 import Footer from '../components/Footer.jsx'
 
 import '../main.css'
@@ -12,7 +12,8 @@ import '../main.css'
 export default function Home() {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(actionHome())
+    // appel de l'action de réinitialisation du message d'erreur
+    dispatch(actionInitErrorMessage())
   })
 
   return (
@@ -20,7 +21,7 @@ export default function Home() {
       <Header />
       <main>
         <Banner />
-        <Features />
+        <FeaturesBank />
       </main>
       <Footer />
     </>

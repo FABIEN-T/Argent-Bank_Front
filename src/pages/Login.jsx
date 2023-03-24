@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { actionIsRememberMe } from '../storeRedux/auth'
-import { thunkLogin } from '../storeRedux/middleware'
-import { actionHome } from '../storeRedux/auth'
+import {
+  actionIsRememberMe,
+  actionInitErrorMessage,
+} from '../_features/auth.slice.js'
+import { mwLogin } from '../_middlewares/middlewares'
 
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
@@ -18,16 +20,19 @@ const Login = () => {
 
   useEffect(() => {
     errorMessage === 'Network Error' && navigate('/errorAPI')
-  })
+  }) // récupération des élements du state
 
   const handleChecked = () => {
+    // appel de l'action "toggle" du checkbox "Remember me" du formulaire d'authentification
     dispatch(actionIsRememberMe())
   }
 
   const save = (e) => {
     const { email, password } = e
-    dispatch(actionHome())
-    dispatch(thunkLogin({ email, password })).then(() => {
+    // appel de l'action de réinitialisation du message d'erreur
+    dispatch(actionInitErrorMessage())
+    // appel de l'action de l'Authentification de l'Utilisateur
+    dispatch(mwLogin({ email, password })).then(() => {
       navigate('/profile')
     })
   }
