@@ -4,10 +4,7 @@ import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 
 function Error({ errorNumber }) {
-  const text =
-    errorNumber === 404
-      ? "La page que vous demandez n'existe pas."
-      : "L'API n'est pas disponible."
+  const text = errorNumber === 404 ? 'Page not found' : 'API is not available.'
   return (
     <>
       <Header />
@@ -15,7 +12,7 @@ function Error({ errorNumber }) {
         <h2 className="titleError">{errorNumber}</h2>
         <p className="paragraph">{text}</p>
         <Link to="/" className="errorLink">
-          Retourner sur la page d’accueil
+          Return to the home page
         </Link>
       </main>
       <Footer />

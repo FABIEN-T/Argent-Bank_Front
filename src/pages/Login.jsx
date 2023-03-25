@@ -29,9 +29,9 @@ const Login = () => {
 
   const save = (e) => {
     const { email, password } = e
-    // appel de l'action de réinitialisation du message d'erreur
+    // appel de l'action réinitialisation du message d'erreur
     dispatch(actionInitErrorMessage())
-    // appel de l'action de l'Authentification de l'Utilisateur
+    // appel de l'action Authentification de l'Utilisateur
     dispatch(mwLogin({ email, password })).then(() => {
       navigate('/profile')
     })
@@ -56,7 +56,7 @@ const Login = () => {
             <input
               type="email"
               name="email"
-              placeholder="saisissez votre email"
+              placeholder="enter your email"
               {...register('email', {
                 required: true,
                 pattern: /^[\w._-]+@[\w-]+\.[a-z]{2,4}$/g,
@@ -78,7 +78,7 @@ const Login = () => {
               label="Password"
               type="password"
               name="password"
-              placeholder="minimum 6 caractères"
+              placeholder="at least 6 characters"
               {...register('password', {
                 required: true,
                 minLength: 6,

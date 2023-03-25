@@ -46,7 +46,7 @@ export default function FormEditName() {
           </div>
           <input
             name="firstName"
-            placeholder="saisissez votre prénom"
+            placeholder="enter your firstname"
             {...register('firstName', {
               required: true,
               maxLength: 20,
@@ -73,7 +73,7 @@ export default function FormEditName() {
           </div>
           <input
             name="lastName"
-            placeholder="saisissez votre nom"
+            placeholder="enter your lastname"
             {...register('lastName', {
               required: true,
               maxLength: 20,
