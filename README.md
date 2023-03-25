@@ -1,12 +1,42 @@
-# Getting Started with Create React App
+# Argent Bank : web and responsive application in REACT
+
+![SNAPSHOT](/src/img/argentBankLogo.png "Titre de l'image")
+
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![js](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![REACT](https://img.shields.io/badge/React-303540?style=for-the-badge&logo=react&logoColor=61DAFB)
+![REDUX](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+
+![Author](<https://img.shields.io/badge/Author-Fabien Varlet-"?style=for-the-badge&color=darkgoldenrod>)
+![size](https://img.shields.io/github/repo-size/FABIEN-T/P13_Argent-Bank_Front?style=for-the-badge)
+
+# Presentation
+
+Argentbank is a React web application with the new user authentication system.
+There are three pages:
+
+- Welcome
+- Authentication
+- User with profile update
+
+# Installing the app
+
+## 1/ Backend
+
+You must first fork and clone the backend at the following address:
+https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API
+
+To start the backend, follow the instructions in the README.md. The database used is MongoDB Community Server.
+
+Then run the application in development mode with the <code>npm run dev:server</code> command on the terminal which opens the port: [http://localhost:3001](http://localhost:3001).
+
+## 2/ Frontend Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
+In the project directory, you can run: `npm start or yarn start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
@@ -14,57 +44,38 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+## Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![npm](https://img.shields.io/badge/npm-9.1.3-%23000000?style=flat-square&logo=npm&logoColor=white)
 
-### `npm run build`
+![yarn](https://img.shields.io/badge/yarn-1.22.19-%232C8EBB?style=flat-square&logo=yarn&logoColor=white)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Back-end :
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Node.js](https://img.shields.io/badge/Node.js-16.14.0-43853D?style=flat-square&logo=node.js&logoColor=white)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Dependencies
 
-### `npm run eject`
+![GitHub package.json dependency version (dev)](https://img.shields.io/github/package-json/dependency-version/FABIEN-T/P13_Argent-Bank_Front/react-scripts?label=React-scripts&color=303540&style=flat-square)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![GitHub package.json dependencies (dev)](https://img.shields.io/github/package-json/dependency-version/FABIEN-T/P13_Argent-Bank_Front/react?label=REACT&logo=react&logoColor=61DAFB&color=303540&style=flat-square)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![GitHub package.json dependency version (dev)](https://img.shields.io/github/package-json/dependency-version/FABIEN-T/P13_Argent-Bank_Front/react-router-dom?label=React-router-dom&color=303540&style=flat-square)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![Redux](https://img.shields.io/badge/Redux-^8.0.5-purple?style=flat-square)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![Axios](https://img.shields.io/badge/Axios-^1.3.4-blue?style=flat-square)
 
-## Learn More
+Bootstrap : 4.6.0
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Prop-type : ^0.0.1
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+React-hook-form : ^7.43.7
 
-### Code Splitting
+### DevDependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![Prettier](https://img.shields.io/badge/Prettier-^2.8.4-blue?style=flat-square)
 
-### Analyzing the Bundle Size
+## Local Storage and Session Storage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+These two storages are used in the application.

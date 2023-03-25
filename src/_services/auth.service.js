@@ -44,7 +44,7 @@ export const serviceGetUserProfile = async (dataUserProfile, isRememberMe) => {
 // Page Profile : Mise à jour du prénom et du nom dans la base de données
 export const serviceUpdateUserProfile = async (updateData, isRememberMe) => {
   const token = JSON.parse(getTokenStorage(isRememberMe))
-  // recupération du token du navigateur et utilisation dans le header pour autorisation
+  // recupération du token depuis le storage du navigateur et utilisation dans le header pour autorisation
   const headerConfig = {
     headers: {
       Accept: 'application/json',

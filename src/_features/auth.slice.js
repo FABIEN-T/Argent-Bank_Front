@@ -18,7 +18,7 @@ import {
   mwUpdateUserProfile,
 } from '../_middlewares/middlewares'
 
-const initialStateMemory = {
+const initialStateDefault = {
   firstName: '',
   lastName: '',
   isLoading: false,
@@ -36,7 +36,7 @@ const persistedState = loadStateLocalStorage()
 // Initialisation de inititialState (dépend de la présence ou non du storage)
 const initialState = persistedState
   ? persistedState.state.auth
-  : initialStateMemory
+  : initialStateDefault
 
 const authSlice = createSlice({
   name: 'authentification',
@@ -68,7 +68,6 @@ const authSlice = createSlice({
   },
 
   extraReducers: {
-    // mw : middleware
     //Login
     [mwLogin.fulfilled]: (state) => {
       // Booleen isToken : token est-il présent dans le storage du navigateur ?

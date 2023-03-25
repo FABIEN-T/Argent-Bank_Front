@@ -20,7 +20,7 @@ export const mwLogin = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString()
-      // retourne le emssage d'erreur récupéré
+      // retourne le message d'erreur récupéré
       return rejectWithValue({ message })
     }
   }

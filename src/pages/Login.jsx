@@ -12,7 +12,7 @@ import { mwLogin } from '../_middlewares/middlewares'
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 
-const Login = () => {
+export default function Login() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -123,5 +123,3 @@ const Login = () => {
     </>
   )
 }
-
-export default Login
